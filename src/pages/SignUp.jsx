@@ -1,34 +1,127 @@
-import React from "react"
+// useState kullanarak hem toggle yapabiliyorum hem koşullu durumlar yaratabiliyorum hem de jsx'ten aldığım bilgileri function içerisinde kullanabiliyorum
+import React, { useState } from "react"
+// useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
+import { useNavigate } from "react-router-dom"
+// sign-up için gerekli sayfaları import ediyorum
+import FirstStep from "../sign-up-step/FirstStep"
+import SecondStep from "../sign-up-step/SecondStep"
+import ThirdStep from "../sign-up-step/ThirdStep"
 
 function SignUp() {
-  return (
-    <div className="bg-gray-300 grid h-screen place-items-center">
-      <div className="card bg-white relative">
-        <div className="m-2 text-center">
-          <i class="fa-solid fa-xmark absolute left-4"></i>
-          <i class="fa-brands fa-twitter text-blue-400 text-4xl"></i>
-        </div>
-        <h1 className="text-center m-4 text-3xl font-bold">
-          Twitter'a Giriş Yap
-        </h1>
-        <div className="border-gray-500 border-2 w-72 rounded-3xl mx-auto my-3 px-4 py-2">
-          <p className="text-center">
-            <i class="fa-brands fa-google pr-2"></i>Google ile oturum açın
+  const [signUp, setSignUp] = useState(false)
+  const [firstStep, setFirstStep] = useState(false)
+  const [secondStep, setSecondStep] = useState(false)
+  const [thirdStep, setThirdStep] = useState(false)
+  const [userInformation, setUserInformation] = useState()
+  const navigate = useNavigate()
+
+  const createAccount = () => {
+    setFirstStep(true)
+    setSignUp(true)
+  }
+
+  if (!signUp) {
+    return (
+      <div className="bg-gray-300 grid h-screen place-items-center">
+        <div className="card bg-white w-[37rem] h-[38rem] relative">
+          <div className="m-2 text-center">
+            <i className="fa-solid fa-xmark absolute left-4"></i>
+            <i className="fa-brands fa-twitter text-blue-400 text-4xl"></i>
+          </div>
+          <h1 className="text-left mx-auto mt-8 mb-4 pr-10 text-3xl font-bold w-72">
+            Bugün Twitter'a katıl
+          </h1>
+          <div className="border-gray-400 border w-[19rem] rounded-3xl mx-auto mt-5 mb-4 px-4 py-2  cursor-pointer">
+            <p className="text-center">
+              <i className="fa-brands fa-google pr-2"></i>
+              <span className="text-gray-500">Google ile kaydolun</span>
+            </p>
+          </div>
+          <div className="border-gray-400 border w-[19rem] rounded-3xl mx-auto my-2 px-4 py-2 cursor-pointer ">
+            <p className="text-center font-bold">
+              <i className="fa-brands fa-apple pr-2 "></i>Apple ile kaydol
+            </p>
+          </div>
+          <div className="relative">
+            <div className="w-32 bg-gray-300 h-px absolute left-36 top-3"></div>
+            <p className="text-center">veya</p>
+            <div className="w-32 bg-gray-300 h-px absolute right-36 top-3"></div>
+          </div>
+          <button
+            onClick={createAccount}
+            className="bg-black w-[19rem] rounded-3xl mx-auto my-4 px-4 py-2 text-white font-bold"
+          >
+            Hesap oluştur
+          </button>
+          <p className="text-gray-500 text-left mx-auto w-[19rem] text-xs mb-3">
+            By signing up, you agree to the{" "}
+            <a
+              href="https://twitter.com/en/tos"
+              target="blank"
+              className="text-sky-500 hover:underline"
+            >
+              Terms of Service
+            </a>{" "}
+            and{" "}
+            <a
+              href="https://twitter.com/en/privacy"
+              target="blank"
+              className="text-sky-500 hover:underline"
+            >
+              Privacy Policy
+            </a>
+            , including{" "}
+            <a
+              href="https://help.twitter.com/en/rules-and-policies/twitter-cookies"
+              target="blank"
+              className="text-sky-500 hover:underline"
+            >
+              Cookie Use.
+            </a>
           </p>
-        </div>
-        <div className="border-gray-500 border-2 w-72 rounded-3xl mx-auto my-3 px-4 py-2">
-          <p className="text-center">
-            <i class="fa-brands fa-apple pr-2"></i>Apple ile giriş yapın
+          <p className="text-gray-500 text-center mt-7 pr-10">
+            Zaten bir hesabın var mı?{" "}
+            <span
+              className="text-sky-500 hover:underline cursor-pointer"
+              onClick={() => {
+                navigate("/")
+              }}
+            >
+              Giriş yap
+            </span>
           </p>
-        </div>
-        <div className="grid gap-4 grid-cols-3 grid-rows-3">
-          <div className="w-36 bg-gray-300 h-1 text-center mx-auto my-1"></div>
-          <p className="text-center">veya</p>
-          <div className="w-36 bg-gray-300 h-1 text-center mx-auto my-1"></div>
         </div>
       </div>
-    </div>
-  )
+    )
+  }
+  if (firstStep) {
+    return (
+      <FirstStep
+        setFirstStep={setFirstStep}
+        setSecondStep={setSecondStep}
+        setUserInformation={setUserInformation}
+      />
+    )
+  }
+  if (secondStep) {
+    return (
+      <SecondStep
+        setFirstStep={setFirstStep}
+        setSecondStep={setSecondStep}
+        setThirdStep={setThirdStep}
+      />
+    )
+  }
+  if (thirdStep) {
+    return (
+      <ThirdStep
+        setFirstStep={setFirstStep}
+        setSecondStep={setSecondStep}
+        setThirdStep={setThirdStep}
+        userInformation={userInformation}
+      />
+    )
+  }
 }
 
 export default SignUp
