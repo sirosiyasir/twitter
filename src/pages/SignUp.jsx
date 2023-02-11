@@ -6,12 +6,14 @@ import { useNavigate } from "react-router-dom"
 import FirstStep from "../sign-up-step/FirstStep"
 import SecondStep from "../sign-up-step/SecondStep"
 import ThirdStep from "../sign-up-step/ThirdStep"
+import FourthStep from "../sign-up-step/FourthStep"
 
 function SignUp() {
   const [signUp, setSignUp] = useState(false)
   const [firstStep, setFirstStep] = useState(false)
   const [secondStep, setSecondStep] = useState(false)
   const [thirdStep, setThirdStep] = useState(false)
+  const [fourthStep, setFourthStep] = useState(false)
   const [userInformation, setUserInformation] = useState()
   const navigate = useNavigate()
 
@@ -26,7 +28,7 @@ function SignUp() {
         <div className="card bg-white w-[37rem] h-[38rem] relative">
           <div className="m-2 text-center">
             <i className="fa-solid fa-xmark absolute left-4"></i>
-            <i className="fa-brands fa-twitter text-blue-400 text-4xl"></i>
+            <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
           </div>
           <h1 className="text-left mx-auto mt-8 mb-4 pr-10 text-3xl font-bold w-72">
             Bugün Twitter'a katıl
@@ -100,6 +102,7 @@ function SignUp() {
         setFirstStep={setFirstStep}
         setSecondStep={setSecondStep}
         setUserInformation={setUserInformation}
+        userInformation={userInformation}
       />
     )
   }
@@ -118,6 +121,17 @@ function SignUp() {
         setFirstStep={setFirstStep}
         setSecondStep={setSecondStep}
         setThirdStep={setThirdStep}
+        setFourthStep={setFourthStep}
+        userInformation={userInformation}
+      />
+    )
+  }
+  if (fourthStep) {
+    return (
+      <FourthStep
+        setFirstStep={setFirstStep}
+        setFourthStep={setFourthStep}
+        setUserInformation={setUserInformation}
         userInformation={userInformation}
       />
     )

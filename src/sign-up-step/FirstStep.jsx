@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
 // props'ları kullanarak function'ları bir sayfadan başka bir sayfaya aktarıyorum
 function FirstStep(props) {
   const [buttonActive, setButtonActive] = useState(true)
   const [MailOrPhone, setMailOrPhone] = useState(true)
-  const [information, setInformation] = useState({})
+  const [information, setInformation] = useState({
+    /* name: "",
+    eMailOrPhone: "",
+    day: "",
+    month: "",
+    year: "", */
+  })
+  /* const { eMailOrPhone, name } = information */
   const date = new Date()
   const year = date.getFullYear()
   const navigate = useNavigate()
@@ -30,7 +37,7 @@ function FirstStep(props) {
   // iyi bir state paylaşımı için useEffect kullanıyorum. Bu sayede yalnızca information değiştiğinde render edilecek
   useEffect(() => {
     props.setUserInformation(information)
-  }, [information])
+  }, [information, props])
 
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
@@ -42,7 +49,7 @@ function FirstStep(props) {
           className="fa-solid fa-xmark absolute left-4 top-4 cursor-pointer"
         ></i>
         <h2 className="absolute left-12 top-2 font-semibold text-xl">
-          Adım 1/5
+          Adım 1/4
         </h2>
         <h1 className="text-left mx-auto mt-16 pr-10 text-3xl font-bold w-[29.5rem]">
           Hesabını oluştur

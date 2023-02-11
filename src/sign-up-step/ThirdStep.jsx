@@ -8,6 +8,9 @@ function ThirdStep(props) {
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
       <div className="card bg-white w-[37rem] h-[38rem] relative">
+        <h2 className="absolute left-12 top-2 font-semibold text-xl">
+          Adım 3/4
+        </h2>
         <i
           className="fa-solid fa-arrow-left absolute left-4 top-4 cursor-pointer"
           onClick={() => {
@@ -29,11 +32,23 @@ function ThirdStep(props) {
             {props.userInformation.name}
             <i className="fa-solid fa-circle-check absolute right-3 bottom-2 text-green-800"></i>
           </div>
-          <div className="border border-gray-300 w-[29rem] h-14 pl-2 pt-4 text-left my-7 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 relative">
+          <div
+            onClick={() => {
+              props.setThirdStep(false)
+              props.setFirstStep(true)
+            }}
+            className="border border-gray-300 w-[29rem] h-14 pl-2 pt-4 text-left my-7 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 relative"
+          >
             {props.userInformation.eMailOrPhone}
             <i className="fa-solid fa-circle-check absolute right-3 bottom-2 text-green-800"></i>
           </div>
-          <div className="border border-gray-300 w-[29rem] h-14 pl-2 pt-4 text-left rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 relative">
+          <div
+            onClick={() => {
+              props.setThirdStep(false)
+              props.setFirstStep(true)
+            }}
+            className="border border-gray-300 w-[29rem] h-14 pl-2 pt-4 text-left rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 relative"
+          >
             {birthday}
             <i className="fa-solid fa-circle-check absolute right-3 bottom-2 text-green-800"></i>
           </div>
@@ -42,6 +57,7 @@ function ThirdStep(props) {
           className="bg-black w-[28rem] h-12 rounded-3xl mx-auto mt-16 mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
           onClick={() => {
             props.setThirdStep(false)
+            props.setFourthStep(true)
           }}
         >
           İleri
