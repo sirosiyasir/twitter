@@ -17,10 +17,10 @@ function Profile() {
   }
 
   return (
-    <div>
-      <div className="flex px-80">
+    <div className="bg-white h-screen">
+      <div className="flex 2xl:px-80 xl:px-80 lg:px-80 md:px-52">
         <div className="flex-1 w-28 mt-4 relative border-r-[1px] border-gray-100">
-          <div className="pl-2">
+          <div className="pl-2 text-black">
             <i className="fa-brands fa-twitter text-blue-400 text-2xl block cursor-pointer"></i>
             <i className="fa-solid fa-house text-2xl mt-7 block cursor-pointer"></i>
             <i

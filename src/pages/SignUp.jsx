@@ -27,26 +27,26 @@ function SignUp() {
       <div className="bg-gray-300 grid h-screen place-items-center">
         <div className="card bg-white w-[37rem] h-[38rem] relative">
           <div className="m-2 text-center">
-            <i className="fa-solid fa-xmark absolute left-4"></i>
+            <i className="fa-solid fa-xmark absolute left-4 text-black"></i>
             <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
           </div>
-          <h1 className="text-left mx-auto mt-8 mb-4 pr-10 text-3xl font-bold w-72">
+          <h1 className="text-black text-left mx-auto mt-8 mb-4 pr-10 text-3xl font-bold w-72">
             Bugün Twitter'a katıl
           </h1>
           <div className="border-gray-400 border w-[19rem] rounded-3xl mx-auto mt-5 mb-4 px-4 py-2  cursor-pointer">
             <p className="text-center">
-              <i className="fa-brands fa-google pr-2"></i>
+              <i className="fa-brands fa-google pr-2 text-black"></i>
               <span className="text-gray-500">Google ile kaydolun</span>
             </p>
           </div>
           <div className="border-gray-400 border w-[19rem] rounded-3xl mx-auto my-2 px-4 py-2 cursor-pointer ">
-            <p className="text-center font-bold">
+            <p className="text-black text-center font-bold">
               <i className="fa-brands fa-apple pr-2 "></i>Apple ile kaydol
             </p>
           </div>
           <div className="relative">
             <div className="w-32 bg-gray-300 h-px absolute left-36 top-3"></div>
-            <p className="text-center">veya</p>
+            <p className="text-center text-black">veya</p>
             <div className="w-32 bg-gray-300 h-px absolute right-36 top-3"></div>
           </div>
           <button

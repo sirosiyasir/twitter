@@ -56,11 +56,11 @@ function FourthStep(props) {
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
       <div className="card bg-white w-[37rem] h-[38rem] relative">
-        <h2 className="absolute left-4 top-2 font-semibold text-xl">
+        <h2 className="text-black absolute left-4 top-2 font-semibold text-xl">
           Adım 4/4
         </h2>
         <div className="mx-auto mt-1 mb-0 pb-0 text-center">
-          <h1 className="text-left mx-auto mt-16 text-3xl font-bold w-[29.5rem]">
+          <h1 className="text-black text-left mx-auto mt-16 text-3xl font-bold w-[29.5rem]">
             Bir şifre girmen gerek
           </h1>
           <p className="text-gray-500 text-left mb-8 mt-1">
@@ -72,7 +72,7 @@ function FourthStep(props) {
               value={password}
               type={passwordCorrect ? "password" : "text"}
               id="name"
-              className="border border-gray-300 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
+              className="bg-white text-black border border-gray-300 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
               placeholder="Şifre"
               min="8"
             />

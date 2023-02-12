@@ -3,20 +3,20 @@ function SecondStep(props) {
     <div className="bg-gray-300 grid h-screen place-items-center">
       <div className="card bg-white w-[37rem] h-[38rem] relative">
         <i
-          className="fa-solid fa-arrow-left absolute left-4 top-4 cursor-pointer"
+          className="text-black fa-solid fa-arrow-left absolute left-4 top-4 cursor-pointer"
           onClick={() => {
             props.setFirstStep(true)
             props.setSecondStep(false)
           }}
         ></i>
-        <h2 className="absolute left-12 top-2 font-semibold text-xl">
+        <h2 className="text-black absolute left-12 top-2 font-semibold text-xl">
           Adım 2/5
         </h2>
         <div className="w-[29.5rem] mx-auto">
-          <h1 className="text-left mx-auto mt-16 mb-8 pr-10 text-3xl font-bold w-[29.5rem]">
+          <h1 className="text-black text-left mx-auto mt-16 mb-8 pr-10 text-3xl font-bold w-[29.5rem]">
             Deneyimini özelleştir
           </h1>
-          <h6 className="my-4 font-bold text-xl w-[28rem]">
+          <h6 className="text-black my-4 font-bold text-xl w-[28rem]">
             Twitter içeriğini web'de nerede gördüğünü takip et
           </h6>
           <div className="relative">
@@ -25,7 +25,10 @@ function SecondStep(props) {
               web gezintisi geçmişi hiçbir zaman adın, e-posta adresin veya
               telefon numaranla saklanmayacaktır.
             </p>
-            <input type="checkbox" className="absolute right-3 top-6 w-5 h-5" />
+            <input
+              type="checkbox"
+              className="bg-white absolute right-3 top-6 w-5 h-5"
+            />
             <p className="text-gray-500 mt-8 mb-18">
               Kaydolarak Koşullarımızı, Gizlilik Politikamızı ve Çerez
               Kullanımımızı kabul etmiş olursun. Twitter, e-posta adresin ve

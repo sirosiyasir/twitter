@@ -32,7 +32,7 @@ function FirstStep(props) {
       }
     } catch (error) {
       toast.error(
-        "Kayıt yaparken bir sorun oluştu. Lütfen bilgilerinizi kontrol ediniz"
+        "Giriş yaparken bir sorun oluştu. Lütfen bilgilerinizi kontrol ediniz"
       )
     }
   }
@@ -45,11 +45,11 @@ function FirstStep(props) {
               props.setFirstStep(false)
               props.setSignIn(true)
             }}
-            className="fa-solid fa-xmark absolute left-4"
+            className="text-black fa-solid fa-xmark absolute left-4"
           ></i>
           <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
         </div>
-        <h1 className="text-left mx-auto mt-6 pr-10 text-3xl font-bold w-[29.5rem]">
+        <h1 className="text-black text-left mx-auto mt-6 pr-10 text-3xl font-bold w-[29.5rem]">
           Şifreni Gir
         </h1>
         <div className="mx-auto mt-2 mb-0 pb-0 text-center">
@@ -63,7 +63,7 @@ function FirstStep(props) {
             <input
               onChange={onChange}
               type={passwordCorrect ? "password" : "text"}
-              className="border border-gray-300 mt-6 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
+              className="bg-white text-black border border-gray-300 mt-6 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
               placeholder="Şifre"
             />
             <i
