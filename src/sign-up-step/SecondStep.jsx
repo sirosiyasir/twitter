@@ -25,10 +25,7 @@ function SecondStep(props) {
               web gezintisi geçmişi hiçbir zaman adın, e-posta adresin veya
               telefon numaranla saklanmayacaktır.
             </p>
-            <input
-              type="checkbox"
-              className="bg-white absolute right-3 top-6 w-5 h-5"
-            />
+            <input type="checkbox" className="absolute right-3 top-6 w-5 h-5" />
             <p className="text-gray-500 mt-8 mb-18">
               Kaydolarak Koşullarımızı, Gizlilik Politikamızı ve Çerez
               Kullanımımızı kabul etmiş olursun. Twitter, e-posta adresin ve
