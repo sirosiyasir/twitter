@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+// context
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
 // props'ları kullanarak function'ları bir sayfadan başka bir sayfaya aktarıyorum
@@ -16,6 +17,7 @@ function FirstStep(props) {
   const date = new Date()
   const year = date.getFullYear()
   const navigate = useNavigate()
+
   const onChange = (e) => {
     setInformation((prevState) => ({
       ...prevState,

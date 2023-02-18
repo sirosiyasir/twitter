@@ -28,7 +28,7 @@ function FirstStep(props) {
         password
       )
       if (userCredential.user) {
-        navigate("/profile")
+        navigate("/home")
       }
     } catch (error) {
       toast.error(
