@@ -18,7 +18,8 @@ function FirstStep(props) {
     setPassword(e.target.value)
   }
 
-  const onClick = async () => {
+  const onSubmit = async (e) => {
+    e.preventDefault()
     try {
       const auth = getAuth()
 
@@ -59,7 +60,7 @@ function FirstStep(props) {
               Kullanıcı adı
             </p>
           </div>
-          <div className="relative">
+          <form onSubmit={onSubmit} className="relative">
             <input
               onChange={onChange}
               type={passwordCorrect ? "password" : "text"}
@@ -73,13 +74,11 @@ function FirstStep(props) {
             <p className="text-sky-500 hover:underline cursor-pointer text-left ml-1 my-1 text-xs">
               Şifreni mi unuttun?
             </p>
-          </div>
-          <button
-            className="bg-black w-[28rem] mt-44 h-14 rounded-3xl mx-auto mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
-            onClick={onClick}
-          >
-            Giriş yap
-          </button>
+            <button className="bg-black w-[28rem] mt-44 h-14 rounded-3xl mx-auto mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500">
+              Giriş yap
+            </button>
+          </form>
+
           <p className="text-gray-400 text-left ml-1 mt-5 text-xs">
             Henüz bir hesabın yok mu?{" "}
             <span

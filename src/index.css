@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* AnasayfaNavbar'ın */
+.my-background-color {
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.5);
+}

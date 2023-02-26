@@ -10,7 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth"
 import { setDoc, doc, serverTimestamp } from "firebase/firestore"
-import { db } from "../firebase.config"
+import { db } from "../../firebase.config"
 
 function FourthStep(props) {
   const [password, setPassword] = useState("")

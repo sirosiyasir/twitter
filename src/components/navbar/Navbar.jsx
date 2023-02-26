@@ -4,12 +4,7 @@ import { useNavigate } from "react-router-dom"
 import useComponentVisible from "../toggle-component/useComponentVisible"
 // firebase'den kullanıcı bilgilerini almak için getAuth'u import ediyorum
 import { getAuth } from "firebase/auth"
-function Navbar() {
-  const [arrow, setArrow] = useState({
-    firstArrow: false,
-    secondArrow: false,
-    thirdArrow: false,
-  })
+function Navbar(props) {
   const [name, setName] = useState("")
   const [menuItems, setMenuItems] = useState({
     bell: false,
@@ -18,7 +13,7 @@ function Navbar() {
     bookmark: false,
     clipboard: false,
     profile: false,
-    home: false,
+    home: true,
   })
 
   const { ref, isComponentVisible, setIsComponentVisible } =
@@ -26,12 +21,12 @@ function Navbar() {
   const navigate = useNavigate()
 
   const navbarOnCLick = (e) => {
+    props.setNavbarClick(e.target.id)
     setMenuItems((prevState) => ({
       ...!prevState,
       [e.target.id]: prevState,
     }))
   }
-
   const menuMoreOnClick = () => {
     setIsComponentVisible(true)
   }
@@ -47,7 +42,7 @@ function Navbar() {
     }
   }, [navigate])
   return (
-    <div className="flex-1 pt-4 relative border-r-[1px] border-gray-100 h-screen">
+    <div className="fixed flex-1 pt-4 h-screen">
       <div className="text-black">
         <i className="fa-brands fa-twitter text-blue-500 text-2xl ml-2 inline-block cursor-pointer"></i>
 
@@ -305,7 +300,7 @@ function Navbar() {
       <button className="bg-sky-500 w-auto h-14 rounded-3xl mr-auto mt-7 mb-0 px-20 py-2 text-white font-bold block hover:bg-sky-600">
         Tweetle
       </button>
-      <button className="absolute hover:bg-slate-200 rounded-3xl w-auto h-[60px] text-right bottom-3 right-2">
+      <button className="absolute hover:bg-slate-200 rounded-3xl px-2 w-auto h-[60px] text-right bottom-3 right-2">
         <table>
           <tbody>
             <tr>
@@ -321,7 +316,7 @@ function Navbar() {
                 <p className="text-left">@sirosiyasir</p>
               </td>
               <td>
-                <i className="fa-solid fa-ellipsis text-2xl cursor-pointer pl-16"></i>
+                <i className="fa-solid fa-ellipsis text-2xl cursor-pointer pl-10"></i>
               </td>
             </tr>
           </tbody>

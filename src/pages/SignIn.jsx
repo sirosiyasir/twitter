@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
-import FirstStep from "../sign-in-step/FirstStep"
+import FirstStep from "../components/sign-in-step/FirstStep"
 
 function SignIn() {
   const [email, setEmail] = useState("")
@@ -12,7 +12,8 @@ function SignIn() {
   const emailChange = (e) => {
     setEmail(e.target.value)
   }
-  const onClick = () => {
+  const onSubmit = (e) => {
+    e.preventDefault()
     if (email.length > 10) {
       setSignIn(false)
       setFirstStep(true)
@@ -47,7 +48,7 @@ function SignIn() {
             <p className="text-black text-center">veya</p>
             <div className="w-32 bg-gray-300 h-px absolute right-36 top-3"></div>
           </div>
-          <div className="mx-auto mt-2 mb-1 text-center">
+          <form onSubmit={onSubmit} className="mx-auto mt-2 mb-1 text-center">
             <input
               value={email}
               onChange={emailChange}
@@ -55,13 +56,10 @@ function SignIn() {
               className="bg-white text-black border border-gray-300 w-[19rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block"
               placeholder="Telefon numarası, e-posta veya kullanıcı adı"
             />
-            <button
-              onClick={onClick}
-              className="bg-black w-[19rem] rounded-3xl mx-auto my-6 px-4 py-2 text-white font-bold"
-            >
+            <button className="bg-black w-[19rem] rounded-3xl mx-auto my-6 px-4 py-2 text-white font-bold">
               İleri
             </button>
-          </div>
+          </form>
           <button className="text-black border border-gray-300 w-[19rem] rounded-3xl mx-auto mb-3 px-4 py-2 font-bold">
             Şifreni mi unuttun ?
           </button>

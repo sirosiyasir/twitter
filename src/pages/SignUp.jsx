@@ -3,10 +3,10 @@ import React, { useState } from "react"
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
 // sign-up için gerekli sayfaları import ediyorum
-import FirstStep from "../sign-up-step/FirstStep"
-import SecondStep from "../sign-up-step/SecondStep"
-import ThirdStep from "../sign-up-step/ThirdStep"
-import FourthStep from "../sign-up-step/FourthStep"
+import FirstStep from "../components/sign-up-step/FirstStep"
+import SecondStep from "../components/sign-up-step/SecondStep"
+import ThirdStep from "../components/sign-up-step/ThirdStep"
+import FourthStep from "../components/sign-up-step/FourthStep"
 
 function SignUp() {
   const [signUp, setSignUp] = useState(false)
