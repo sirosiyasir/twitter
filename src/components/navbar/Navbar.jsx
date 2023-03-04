@@ -50,7 +50,10 @@ function Navbar(props) {
           onClick={navbarOnCLick}
           className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-36 h-12 mt-4 relative"
         >
-          <i className="fa-solid fa-house text-2xl cursor-pointer absolute top-2 left-3"></i>
+          <i
+            id="home"
+            className="fa-solid fa-house text-2xl cursor-pointer absolute top-2 left-3"
+          ></i>
           <span
             id="home"
             className={
