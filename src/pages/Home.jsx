@@ -5,7 +5,6 @@ import Anasayfa from "../components/navbar-pages/Anasayfa/Anasayfa"
 import Keşfet from "../components/navbar-pages/Keşfet"
 function Profile() {
   const [navbarClick, setNavbarClick] = useState("home")
-  console.log(navbarClick)
   return (
     <div className="bg-white h-screen">
       <div className="flex 2xl:px-80 md:px-40">

@@ -48,6 +48,7 @@ function Navbar(props) {
 
         <button
           onClick={navbarOnCLick}
+          id="home"
           className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-36 h-12 mt-4 relative"
         >
           <i
