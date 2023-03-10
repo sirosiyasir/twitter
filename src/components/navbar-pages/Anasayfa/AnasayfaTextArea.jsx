@@ -50,6 +50,7 @@ function AnasayfaTextArea() {
       setProgressBar(false)
     }
   }
+
   return (
     <div className="grid grid-cols-8 w-auto border-y-[1px] border-gray-100 h-auto">
       <div>
@@ -80,21 +81,21 @@ function AnasayfaTextArea() {
                 <h1 className="text-xl font-semibold my-3 ml-3">
                   Hedef kitle seç
                 </h1>
-                <div className="mt-2">
+                <div className="cursor-pointer hover:bg-gray-100 py-4">
                   <i className="fa-solid fa-earth-americas inline text-left ml-5 text-xl"></i>
                   <p className="inline font-semibold text-lg ml-6">
                     Herkese açık
                   </p>
                 </div>
 
-                <div className="my-5 relative">
+                <div className="mt-1 relative cursor-pointer hover:bg-gray-100">
                   <i className="fa-solid fa-user-check absolute top-3 left-5 text-xl"></i>
                   <div className="inline-block">
                     <p className=" font-semibold text-lg ml-[66px]">
                       Twitter Çevresi
                     </p>
                     <p className="ml-[66px]">
-                      0 People
+                      <span className="font-semibold">0</span> People
                       <span className="underline cursor-pointer ml-4 font-semibold">
                         Edit
                       </span>
@@ -118,11 +119,33 @@ function AnasayfaTextArea() {
         >
           {isComponentVisible2 && (
             <div className="relative">
-              <div className="card bg-white w-[260px] h-[192px] shadow-lg absolute -left-16">
-                <div className="flex flex-col">
-                  <h1 className="text-xl font-semibold my-3 ml-3">
-                    Hedef kitle seç
-                  </h1>
+              <div className="card bg-white w-[320px] h-[284px] shadow-lg absolute -left-16">
+                <div className="pt-[16px] px-[16px]">
+                  <h1 className="text-xl font-semibold">Hedef kitle seç</h1>
+                  <p className="text-[15px] text-gray-500">
+                    Choose who can reply to this Tweet. Anyone mentioned can
+                    always reply.
+                  </p>
+                </div>
+                <div className="grid grid-row-3">
+                  <div className="cursor-pointer hover:bg-gray-100 py-4">
+                    <i className="fa-solid fa-earth-americas inline text-left ml-5 text-xl"></i>
+                    <p className="inline font-semibold text-md ml-6">
+                      Herkese açık
+                    </p>
+                  </div>
+                  <div className="cursor-pointer hover:bg-gray-100 py-4">
+                    <i className="fa-solid fa-user-check inline text-left ml-5 text-xl"></i>
+                    <p className="inline font-semibold text-md ml-6">
+                      Takip ettiğin kişiler
+                    </p>
+                  </div>
+                  <div className="cursor-pointer hover:bg-gray-100 py-4">
+                    <i className="fa-solid fa-at inline text-left ml-5 text-xl"></i>
+                    <p className="inline font-semibold text-md ml-6">
+                      Yalnızca bahsettiğin kişiler
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -165,7 +188,7 @@ function AnasayfaTextArea() {
             <div className="inline ml-[32px]">
               <div className={textAreaValue ? "inline" : "hidden"}>
                 <div className="border mx-2 border-gray-200 inline"></div>
-                <i className="fa-solid fa-plus ml-2 mr-3 rounded-3xl border pl-1 py-1 pr-[3px] border-gray-300 text-sky-400"></i>
+                <i className="fa-solid fa-plus cursor-pointer ml-2 mr-3 rounded-3xl border pl-[5px] py-1 pr-[3px] border-gray-300 text-sky-400"></i>
               </div>
               <button
                 disabled={!textAreaValue}
