@@ -1,11 +1,13 @@
-import { useState } from "react"
-// div dışında herhangi yere tıklanıldığı zaman açılır-kapanır bir div oluşturmak için
-import useComponentVisible from "../../toggle-component/useComponentVisible"
+import { useState, useContext } from "react"
+// props kullanarak iletemediklerimi context yapısı kullanarak iletiyorum
+import AnasayfaContext from "../../context/AnasayfaContext"
 /* aynı jsx'te iki div'de aynı anda kullanılamadığından bir tane daha useComponentVisible oluşturdum(alternatif: burada 
   kullanılan 2. div ayrı bir .jsx olarak oluşturulup o .jsx'te useComponent'ı kullanabilir ve buraya da .jsx'i import ederdik) */
+import useComponentVisible from "../../toggle-component/useComponentVisible"
 import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 
 function AnasayfaTextArea() {
+  const { setHomePageOpacity } = useContext(AnasayfaContext)
   // Tweet yazma bölgesine tıklandığında gerekli bazı yerlerin ortaya çıkması için openTextArea
   const [openTextArea, setOpenTextArea] = useState(false)
   // Textarea'ya yazılan değeri yakalamak için textValue
@@ -49,6 +51,12 @@ function AnasayfaTextArea() {
       setOverText("border-red-500 bg-white")
       setProgressBar(false)
     }
+  }
+  // Yeni tweet eklemeye tıklanıldığı zaman
+  const addMoreTweetClick = () => {
+    setHomePageOpacity((prevState) => {
+      return !prevState
+    })
   }
 
   return (
@@ -188,7 +196,10 @@ function AnasayfaTextArea() {
             <div className="inline ml-[32px]">
               <div className={textAreaValue ? "inline" : "hidden"}>
                 <div className="border mx-2 border-gray-200 inline"></div>
-                <i className="fa-solid fa-plus cursor-pointer ml-2 mr-3 rounded-3xl border pl-[5px] py-1 pr-[3px] border-gray-300 text-sky-400"></i>
+                <i
+                  onClick={addMoreTweetClick}
+                  className="fa-solid fa-plus cursor-pointer ml-2 mr-3 rounded-3xl border pl-[5px] py-1 pr-[3px] border-gray-300 text-sky-400"
+                ></i>
               </div>
               <button
                 disabled={!textAreaValue}
