@@ -26,7 +26,7 @@ function SignIn() {
       <div className="bg-gray-300 grid h-screen place-items-center">
         <div className="card bg-white w-[37rem] h-[38rem] relative">
           <div className="m-2 text-center">
-            <i className="fa-solid fa-xmark absolute left-4 text-black"></i>
+            <i className="fa-solid fa-xmark absolute left-4 text-black cursor-pointer"></i>
             <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
           </div>
           <h1 className="text-black text-center mt-8 mb-4 pr-10 text-3xl font-bold">

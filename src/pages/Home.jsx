@@ -8,10 +8,14 @@ import AnasayfaContext from "../components/context/AnasayfaContext"
 
 function Profile() {
   const [navbarClick, setNavbarClick] = useState("home")
+  // Eğer Ek tweet eklemek istenirse pencere(addMoreTweet bar) açıldığı zaman arka planın desabled olması için
   const [homePageOpacity, setHomePageOpacity] = useState(true)
+  const [textValue, setTextValue] = useState("")
 
   return (
-    <AnasayfaContext.Provider value={{ homePageOpacity, setHomePageOpacity }}>
+    <AnasayfaContext.Provider
+      value={{ homePageOpacity, setHomePageOpacity, textValue, setTextValue }}
+    >
       <div>
         <div
           className={`bg-white h-screen ${
@@ -35,7 +39,7 @@ function Profile() {
               : "fixed top-0 left-0 z-50 h-full w-full backdrop"
           }`}
         >
-          <AnasayfaAddMoreTweet />
+          <AnasayfaAddMoreTweet textValue={textValue} />
         </div>
       </div>
     </AnasayfaContext.Provider>

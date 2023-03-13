@@ -7,17 +7,17 @@ import useComponentVisible from "../../toggle-component/useComponentVisible"
 import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 
 function AnasayfaTextArea() {
-  const { setHomePageOpacity } = useContext(AnasayfaContext)
+  const { setHomePageOpacity, setTextValue } = useContext(AnasayfaContext)
   // Tweet yazma bölgesine tıklandığında gerekli bazı yerlerin ortaya çıkması için openTextArea
   const [openTextArea, setOpenTextArea] = useState(false)
-  // Textarea'ya yazılan değeri yakalamak için textValue
-  const [textValue, setTextValue] = useState("")
+  // Textarea'ya yazılan değerin uzunluğunu yakalamak için
+  const [textValueLength, setTextValueLength] = useState("")
   // 280 kelimelik sınırın aşıldığını belirtmek için overText
   const [overText, setOverText] = useState("")
   // Progress Bar'ın text area'daki durumunu değiştirebilmek için
   const [progressBar, setProgressBar] = useState(true)
   // Progress Bar ve onunla birlikte açılacak olanların text area'daki value'ye göre belirlenmesi için
-  const [textAreaValue, setTextAreaValue] = useState(false)
+  const [textAreaValueCheck, setTextAreaValueCheck] = useState(false)
 
   const { ref, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false)
@@ -38,16 +38,17 @@ function AnasayfaTextArea() {
   //Text area'ya girilen değerler için progress bar'ı etkinleştirmek ve button'ı disabled'dan çekmek vb için
   const textAreaChange = (e) => {
     if (e.target.value !== "") {
-      setTextAreaValue(true)
+      setTextValue(e.target.value)
+      setTextAreaValueCheck(true)
     } else if (e.target.value === "") {
-      setTextAreaValue(false)
+      setTextAreaValueCheck(false)
     }
     if (e.target.value.length <= 280) {
-      setTextValue(`${e.target.value.length * 1.28}deg`)
+      setTextValueLength(`${e.target.value.length * 1.28}deg`)
       setProgressBar(true)
       setOverText("")
     } else if (e.target.value.length > 280) {
-      setTextValue(e.target.value.length)
+      setTextValueLength(e.target.value.length)
       setOverText("border-red-500 bg-white")
       setProgressBar(false)
     }
@@ -179,22 +180,22 @@ function AnasayfaTextArea() {
               style={
                 progressBar
                   ? {
-                      background: `conic-gradient(rgba(84, 157, 206, 0.867) ${textValue}, #ededed 0deg)`,
+                      background: `conic-gradient(rgba(84, 157, 206, 0.867) ${textValueLength}, #ededed 0deg)`,
                     }
                   : {
                       background: "transparent",
                     }
               }
               className={
-                textAreaValue
+                textAreaValueCheck
                   ? `w-7 h-7 absolute top-[3px] rounded-3xl border text-center ${overText}`
                   : "hidden"
               }
             >
-              {!progressBar && textValue - 280}
+              {!progressBar && textValueLength - 280}
             </div>
             <div className="inline ml-[32px]">
-              <div className={textAreaValue ? "inline" : "hidden"}>
+              <div className={textAreaValueCheck ? "inline" : "hidden"}>
                 <div className="border mx-2 border-gray-200 inline"></div>
                 <i
                   onClick={addMoreTweetClick}
@@ -202,7 +203,7 @@ function AnasayfaTextArea() {
                 ></i>
               </div>
               <button
-                disabled={!textAreaValue}
+                disabled={!textAreaValueCheck}
                 className="text-md bg-sky-500 text-white font-semibold rounded-3xl px-[14px] py-[6px] disabled:bg-sky-300"
               >
                 Tweetle

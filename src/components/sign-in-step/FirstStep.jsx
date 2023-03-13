@@ -46,7 +46,7 @@ function FirstStep(props) {
               props.setFirstStep(false)
               props.setSignIn(true)
             }}
-            className="text-black fa-solid fa-xmark absolute left-4"
+            className="text-black fa-solid fa-xmark absolute left-4 cursor-pointer"
           ></i>
           <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
         </div>
