@@ -39,7 +39,7 @@ function Profile() {
               : "fixed top-0 left-0 z-50 h-full w-full backdrop"
           }`}
         >
-          <AnasayfaAddMoreTweet textValue={textValue} />
+          <AnasayfaAddMoreTweet />
         </div>
       </div>
     </AnasayfaContext.Provider>
