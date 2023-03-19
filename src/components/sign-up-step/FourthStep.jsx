@@ -1,8 +1,6 @@
 import { useState } from "react"
 // error vb kutucuklar oluşturmak için toastify'ı kullanıyorum
 import { toast } from "react-toastify"
-// useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
-import { useNavigate } from "react-router-dom"
 // firebase'i import ediyorum
 import {
   getAuth,
@@ -15,8 +13,8 @@ import { db } from "../../firebase.config"
 function FourthStep(props) {
   const [password, setPassword] = useState("")
   const [passwordCorrect, setPasswordCorrect] = useState(true)
+  const [registrationCorrect, setRegistrationCorrect] = useState(false)
 
-  const navigate = useNavigate()
   const passwordOnClick = () => {
     setPasswordCorrect((prevState) => {
       return !prevState
@@ -46,8 +44,8 @@ function FourthStep(props) {
       userInformationCopy.timestamp = serverTimestamp()
 
       await setDoc(doc(db, "users", user.uid), userInformationCopy)
-
-      navigate("/")
+      props.setFourthStep(false)
+      props.setFifthStep(true)
     } catch (error) {
       toast.error("Something went wrong with registration")
     }

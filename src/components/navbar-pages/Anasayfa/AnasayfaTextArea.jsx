@@ -6,7 +6,7 @@ import AnasayfaContext from "../../context/AnasayfaContext"
 import useComponentVisible from "../../toggle-component/useComponentVisible"
 import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 // Tweet Area'nın alt kısmı
-import ProgressBarArea from "./ProgressBarArea"
+import ProgressBarArea from "./templates/ProgressBarArea"
 
 function AnasayfaTextArea() {
   const { setHomePageOpacity, setTextValue } = useContext(AnasayfaContext)

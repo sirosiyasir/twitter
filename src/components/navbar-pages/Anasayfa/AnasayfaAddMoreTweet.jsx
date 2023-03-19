@@ -6,7 +6,7 @@ import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 // Context
 import AnasayfaContext from "../../context/AnasayfaContext"
 // Tweet Area'daki alt kısım
-import ProgressBarArea from "./ProgressBarArea"
+import ProgressBarArea from "./templates/ProgressBarArea"
 
 function AnasayfaAddMoreTweet() {
   //context
@@ -14,15 +14,18 @@ function AnasayfaAddMoreTweet() {
     useContext(AnasayfaContext)
   // Tweet yazma bölgesine tıklandığında gerekli bazı yerlerin ortaya çıkması için openTextArea
   const [openTextArea, setOpenTextArea] = useState(false)
-  // Textarea'ya yazılan değeri yakalamak için textValue
+  // Textarea'ya yazılan değeri yakalayıp progress bar'da kullanmak için textValue
   const [tweetTextValue, setTweetTextValue] = useState("")
+  // Textarea'ya yazılan değeri yakalamak için
+  const [tweetValue, setTweetValue] = useState("")
   // 280 kelimelik sınırın aşıldığını belirtmek için overText
   const [overText, setOverText] = useState("")
   // Progress Bar'ın text area'daki durumunu değiştirebilmek için
   const [progressBar, setProgressBar] = useState(true)
   // Progress Bar ve onunla birlikte açılacak olanların text area'daki value'ye göre belirlenmesi için
   const [textAreaValue, setTextAreaValue] = useState(false)
-
+  // Yeni tweet'teki x mark'a tıklanıldığı zaman
+  const [closeAddNewTweet, setCloseAddNewTweet] = useState(true)
   // İlk Tweet için 280 kelimelik sınırın aşıldığını belirtmek için overText
   const [prevOverText, setPrevOverText] = useState("")
   // İlk Tweet için Progress Bar'ın text area'daki durumunu değiştirebilmek için
@@ -32,9 +35,7 @@ function AnasayfaAddMoreTweet() {
   // ilk tweet'in value'si var mı
   const [textAreaValueCheck, setTextAreaValueCheck] = useState(true)
   // İlk tweet için progress bar deg ayarı
-  const [textValueLength, setTextValueLength] = useState(
-    textValue.length * 1.28 + "deg"
-  )
+  const [textValueLength, setTextValueLength] = useState("")
 
   // açılır kapanır toggle
   const { ref, isComponentVisible, setIsComponentVisible } =
@@ -51,6 +52,7 @@ function AnasayfaAddMoreTweet() {
   }
   // İkinci eklenen Text area'ya girilen değerler için progress bar'ı etkinleştirmek ve button'ı disabled'dan çekmek vb için
   const textAreaChange = (e) => {
+    setTweetValue(e.target.value)
     if (e.target.value !== "") {
       setTextAreaValue(true)
     } else if (e.target.value === "") {
@@ -67,12 +69,20 @@ function AnasayfaAddMoreTweet() {
     }
   }
 
+  // yeni tweet eklemeyi kaldırmak için
+  const closeNewTweet = () => {
+    setCloseAddNewTweet(false)
+  }
+
   // Yeni tweet eklemeye tıklanıldığı zaman
-  const addMoreTweetClick = () => {}
+  const addMoreTweetClick = () => {
+    setCloseAddNewTweet(true)
+  }
 
   // ekstra olarak açılan yeni tweetbarı kapatmak için
   const closeTextBarClick = () => {
     setHomePageOpacity(true)
+    setTweetValue("")
   }
 
   // yazılan eski tweet'e tıklanıldığında o alanın aktif edilmesi için
@@ -127,7 +137,7 @@ function AnasayfaAddMoreTweet() {
             alt=""
           />
           <div className="col-span-7">
-            <div className={`${tweetOpacity ? "hidden" : "relative z-50"}`}>
+            <div className={tweetOpacity ? "hidden" : "relative z-50"}>
               <p
                 onClick={everyoneClick}
                 ref={ref}
@@ -177,7 +187,7 @@ function AnasayfaAddMoreTweet() {
               value={textValue}
               onChange={textAreaOnChange}
             ></textarea>
-            <div className={tweetOpacity && "hidden"}>
+            <div className={tweetOpacity ? "hidden" : "block"}>
               {isComponentVisible2 && (
                 <div className="relative">
                   <div className="card bg-white w-[320px] h-[284px] shadow-lg absolute -left-16">
@@ -228,14 +238,14 @@ function AnasayfaAddMoreTweet() {
             )}
           </div>
         </div>
-        {!tweetOpacity && (
-          <div className="h-[173px] w-[2px] bg-gray-300 absolute top-20 left-[30px]"></div>
-        )}
+        {!tweetOpacity & closeAddNewTweet ? (
+          <div className="h-[165px] w-[2px] bg-gray-300 absolute top-[83px] left-[30px]"></div>
+        ) : null}
         <div
           onClick={newTweetClick}
           className={`grid grid-cols-8 w-auto border-gray-100 h-auto ${
-            tweetOpacity ? "opacity-100" : "opacity-60"
-          }`}
+            closeAddNewTweet ? "block" : "hidden"
+          } ${tweetOpacity ? "opacity-100" : "opacity-60"}`}
         >
           <div>
             <img
@@ -248,9 +258,18 @@ function AnasayfaAddMoreTweet() {
           </div>
 
           <div className="col-span-7 mt-2">
+            {tweetOpacity && (
+              <i
+                onClick={closeNewTweet}
+                className={`fa-solid fa-xmark cursor-pointer absolute right-[60px] text-sky-400 text-sm ${
+                  tweetValue !== "" ? "hidden" : "block"
+                }`}
+              ></i>
+            )}
             <textarea
               onChange={textAreaChange}
               onClick={textAreaOnClick}
+              value={tweetValue}
               className="block w-full resize-none outline-none mt-5 placeholder:text-xl"
               placeholder="Bir tweet daha ekle"
             ></textarea>
@@ -333,10 +352,6 @@ function AnasayfaAddMoreTweet() {
                   <div className="inline ml-[32px]">
                     <div className={textAreaValue ? "inline" : "hidden"}>
                       <div className="border mx-2 border-gray-200 inline"></div>
-                      <i
-                        onClick={addMoreTweetClick}
-                        className="fa-solid fa-plus cursor-pointer ml-2 mr-3 rounded-3xl border pl-[5px] py-1 pr-[3px] border-gray-300 text-sky-400"
-                      ></i>
                     </div>
                     <button
                       disabled={!textAreaValue}

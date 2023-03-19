@@ -7,6 +7,8 @@ import FirstStep from "../components/sign-up-step/FirstStep"
 import SecondStep from "../components/sign-up-step/SecondStep"
 import ThirdStep from "../components/sign-up-step/ThirdStep"
 import FourthStep from "../components/sign-up-step/FourthStep"
+import FifthStep from "../components/sign-up-step/FifthStep"
+import SixthStep from "../components/sign-up-step/SixthStep"
 
 function SignUp() {
   const [signUp, setSignUp] = useState(false)
@@ -14,6 +16,8 @@ function SignUp() {
   const [secondStep, setSecondStep] = useState(false)
   const [thirdStep, setThirdStep] = useState(false)
   const [fourthStep, setFourthStep] = useState(false)
+  const [fifthStep, setFifthStep] = useState(false)
+  const [sixthStep, setSixthStep] = useState(false)
   const [userInformation, setUserInformation] = useState()
   const navigate = useNavigate()
 
@@ -131,10 +135,17 @@ function SignUp() {
       <FourthStep
         setFirstStep={setFirstStep}
         setFourthStep={setFourthStep}
+        setFifthStep={setFifthStep}
         setUserInformation={setUserInformation}
         userInformation={userInformation}
       />
     )
+  }
+  if (fifthStep) {
+    return <FifthStep setFifthStep={setFifthStep} setSixthStep={setSixthStep} />
+  }
+  if (sixthStep) {
+    return <SixthStep />
   }
 }
 

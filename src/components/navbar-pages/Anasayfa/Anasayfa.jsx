@@ -1,5 +1,6 @@
 import AnasayfaNavbar from "../../navbar/AnasayfaNavbar"
 import AnasayfaTextArea from "./AnasayfaTextArea"
+import CreateTweet from "./templates/CreateTweet"
 
 function Anasayfa() {
   return (
@@ -7,7 +8,7 @@ function Anasayfa() {
       <AnasayfaNavbar />
       <div className="mt-32">
         <AnasayfaTextArea />
-        <div className="w-auto h-32">Hello</div>
+        <CreateTweet />
         <div className="w-auto h-32">Hello</div>
         <div className="w-auto h-32">Hello</div>
         <div className="w-auto h-32">Hello</div>
