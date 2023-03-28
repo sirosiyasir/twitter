@@ -8,7 +8,7 @@ import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 // Tweet Area'nın alt kısmı
 import ProgressBarArea from "./templates/ProgressBarArea"
 
-function AnasayfaTextArea() {
+function AnasayfaTextArea(props) {
   const { setHomePageOpacity, setTextValue } = useContext(AnasayfaContext)
   // Tweet yazma bölgesine tıklandığında gerekli bazı yerlerin ortaya çıkması için openTextArea
   const [openTextArea, setOpenTextArea] = useState(false)
@@ -66,10 +66,12 @@ function AnasayfaTextArea() {
     <div className="grid grid-cols-8 w-auto border-y-[1px] border-gray-100 h-auto">
       <div>
         <img
-          className="rounded-3xl m-3"
-          src="https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
-          width="40px"
-          height="40px"
+          className="rounded-full m-3 w-12 h-12"
+          src={
+            props.profilePhoto !== ""
+              ? props.profilePhoto
+              : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
+          }
           alt=""
         />
       </div>

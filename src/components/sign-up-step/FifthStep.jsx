@@ -6,6 +6,7 @@ function FifthStep(props) {
   const loadFile = (e) => {
     if (e.target.files && e.target.files[0]) {
       setUserProfilePicture(URL.createObjectURL(e.target.files[0]))
+      props.setUserPhoto(e.target.files[0])
     }
   }
   return (
@@ -24,9 +25,12 @@ function FifthStep(props) {
           <div className="mt-20">
             <div className="relative inline-block">
               <img
-                className="rounded-full m-auto h-max"
-                src={profilePicture}
-                width="192px"
+                className="rounded-full m-auto w-[192px] h-[192px]"
+                src={
+                  userProfilePicture === ""
+                    ? profilePicture
+                    : userProfilePicture
+                }
                 alt=""
               />
               <input

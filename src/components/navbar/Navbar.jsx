@@ -2,10 +2,8 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 // div dışında herhangi yere tıklanıldığı zaman açılır-kapanır bir div oluşturmak için
 import useComponentVisible from "../toggle-component/useComponentVisible"
-// firebase'den kullanıcı bilgilerini almak için getAuth'u import ediyorum
-import { getAuth } from "firebase/auth"
+
 function Navbar(props) {
-  const [name, setName] = useState("")
   const [menuItems, setMenuItems] = useState({
     bell: false,
     envelope: false,
@@ -16,9 +14,8 @@ function Navbar(props) {
     home: true,
   })
 
-  const { ref, isComponentVisible, setIsComponentVisible } =
+  const { reference, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false)
-  const navigate = useNavigate()
 
   const navbarOnCLick = (e) => {
     props.setNavbarClick(e.target.id)
@@ -30,19 +27,9 @@ function Navbar(props) {
   const menuMoreOnClick = () => {
     setIsComponentVisible(true)
   }
-  // eğer kullanıcı sayfayı yenilerse tekrar sign-in yapabilmesi için onu "/"a yönlendiriyorum. Bunu yapmamın başlıca
-  // sebebi, kullanıcıyla ilgili bilgileri firebase'den alıp yansıtmam.
-  useEffect(() => {
-    const auth = getAuth()
-    const user = auth.currentUser
-    if (user) {
-      setName(user.reloadUserInfo.displayName)
-    } else if (!user) {
-      navigate("/")
-    }
-  }, [navigate])
+
   return (
-    <div className="fixed flex-1 pt-4 h-screen">
+    <div className="fixed flex-1 pt-4 h-screen w-[259px]">
       <div className="text-black">
         <i className="fa-brands fa-twitter text-blue-500 text-2xl ml-2 inline-block cursor-pointer"></i>
 
@@ -217,7 +204,7 @@ function Navbar(props) {
           </span>
         </button>
 
-        <div className="relative mt-2 h-[50px] inline-block" ref={ref}>
+        <div className="relative mt-2 h-[50px] inline-block" ref={reference}>
           {!isComponentVisible && (
             <button
               onClick={menuMoreOnClick}
@@ -301,30 +288,30 @@ function Navbar(props) {
           )}
         </div>
       </div>
-      <button className="bg-sky-500 w-auto h-14 rounded-3xl mr-auto mt-7 mb-0 px-20 py-2 text-white font-bold block hover:bg-sky-600">
+      <button className="bg-sky-500 w-auto h-14 rounded-full mr-auto mt-7 mb-0 px-[90px] py-2 text-white font-bold block hover:bg-sky-600">
         Tweetle
       </button>
       <button className="absolute hover:bg-slate-200 rounded-3xl px-2 w-auto h-[60px] text-right bottom-3 right-2">
-        <table>
-          <tbody>
-            <tr>
-              <td>
-                <img
-                  src="https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
-                  className="w-10 h-auto rounded-3xl"
-                  alt="twitterProfilePhoto"
-                />
-              </td>
-              <td className="pl-3">
-                <p className="text-center font-bold pl-1">{name}</p>
-                <p className="text-left">@sirosiyasir</p>
-              </td>
-              <td>
-                <i className="fa-solid fa-ellipsis text-2xl cursor-pointer pl-10"></i>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="flex flex-row w-max">
+          <div>
+            <img
+              src={
+                props.profilePhoto !== ""
+                  ? props.profilePhoto
+                  : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
+              }
+              className="w-10 h-10 rounded-3xl"
+              alt="twitterProfilePhoto"
+            />
+          </div>
+          <div className="px-5">
+            <p className="text-center font-bold w-auto">{props.name}</p>
+            <p className="text-left">@sirosiyasir</p>
+          </div>
+          <div className="mt-2">
+            <i className="fa-solid fa-ellipsis text-2xl cursor-pointer"></i>
+          </div>
+        </div>
       </button>
     </div>
   )

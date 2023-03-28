@@ -1,52 +1,117 @@
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { storage } from "../../firebase.config"
+import { ref, uploadBytes } from "firebase/storage"
+import { getAuth } from "firebase/auth"
 
-function SixthStep() {
+function SixthStep(props) {
+  const [autoNames, setAutoNames] = useState({
+    firstName: "",
+    secondName: "",
+  })
   const [userName, setUserName] = useState("")
+  const [realName, setRealName] = useState("")
+  const [inputFocus, setInputFocus] = useState(false)
   const navigate = useNavigate()
   const onChangeInput = (e) => {
     setUserName(e.target.value)
   }
+  useEffect(() => {
+    setAutoNames(() => {
+      return {
+        firstName: Math.floor(Math.random() * 1500),
+        secondName: Math.floor(Math.random() * 1000),
+      }
+    })
+    setRealName(props.userInformation.name)
+  }, [props.userInformation.name])
+
+  const uploadUserPhoto = () => {
+    const auth = getAuth()
+    const user = auth.currentUser
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+
+      if (props.userPhoto !== null) {
+        const imageRef = ref(storage, `images/${"profilePhoto" + user.uid}`)
+        uploadBytes(imageRef, props.userPhoto)
+      }
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  }
+
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
       <div className="card bg-white w-[37rem] h-[38rem] relative">
         <div className="m-2 text-center">
           <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
         </div>
-        <div className="mx-auto mt-1 mb-0 pb-0 text-center">
-          <h1 className="text-black text-left mx-auto mt-16 text-3xl font-bold w-[29.5rem]">
+        <div className="mx-auto mt-3 mb-0 pb-0 text-center">
+          <h1 className="text-black text-left text-3xl font-bold w-[29.5rem]">
             Kullanıcı adın ne olsun?
           </h1>
-          <p className="text-gray-500 text-left mb-8 mt-1">
+          <p className="text-gray-500 text-left mb-8 mt-2">
             kullanıcı_adın eşsizdir. Daha sonra burada her zaman
             değiştirebilirsin.
           </p>
-          <div className="relative">
+          <div className="relative w-[29rem]">
             <p
-              className="absolute top-3 left-1 text-lg font-semibold"
-              autofocus
+              className={`absolute top-2 left-2 text-sm font-semibold ${
+                inputFocus ? "text-sky-400" : null
+              }`}
+            >
+              Kullanıcı adı
+            </p>
+            <p
+              className={`absolute top-6 left-[6px] text-md font-semibold ${
+                inputFocus ? "text-sky-400" : null
+              }`}
             >
               @
             </p>
             <input
               onChange={onChangeInput}
+              onFocus={() => {
+                setInputFocus(true)
+              }}
+              maxLength="20"
               value={userName}
+              autoFocus
               type="text"
-              className="bg-white text-black border border-gray-300 w-[29rem] h-14 pl-5 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
+              className={`"bg-white text-black border border-gray-300 w-full h-14 pt-[18px] pl-6 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 focus:${() => {
+                setInputFocus(true)
+              }}"`}
               min="8"
             />
-            <i className="fa-solid fa-circle-check absolute right-8 top-6 cursor-pointer"></i>
+            <i
+              className={`fa-solid fa-circle-check absolute right-8 top-6 cursor-pointer ${
+                userName.length > 4 ? "text-green-700" : null
+              }`}
+            ></i>
+            <div className="flex gap-1 text-left text-sm text-sky-400 mt-5">
+              <p>@{realName.slice(0, 3) + autoNames.firstName},</p>
+              <p>@{realName.slice(0, 3) + autoNames.secondName}</p>
+            </div>
+
+            <p className="text-left text-sky-400 mt-5 text-sm">
+              Daha fazla göster
+            </p>
           </div>
-          <button
-            className="bg-white w-[28rem] mt-32 h-12 rounded-3xl mx-auto mb-0 px-4 py-2 border border-gray-300 text-black font-bold block hover:bg-gray-300"
-            onClick={() => {
-              navigate("/")
-            }}
-          >
-            Şimdilik atla
-          </button>
         </div>
+        <button
+          className="bg-white w-[28rem] h-12 rounded-3xl absolute bottom-6 left-[66px] border border-gray-300 text-black font-bold block hover:bg-gray-300"
+          onClick={() => {
+            uploadUserPhoto()
+            navigate("/")
+          }}
+        >
+          {userName.length < 4 ? "Şimdilik atla" : "Devam et"}
+        </button>
       </div>
     </div>
   )

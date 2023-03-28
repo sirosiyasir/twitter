@@ -1,14 +1,16 @@
 import React from "react"
 
-function CreateTweet() {
+function CreateTweet(props) {
   return (
-    <div className="w-auto h-auto">
-      <div className="flex flex-column">
+    <div>
+      <div className="flex flex-row">
         <img
-          className="rounded-3xl m-3 h-max"
-          src="https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
-          width="40px"
-          height="40px"
+          className="rounded-full m-5 h-12 w-12 flex-none"
+          src={
+            props.profilePhoto !== ""
+              ? props.profilePhoto
+              : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
+          }
           alt=""
         />
         <div className="pt-3">

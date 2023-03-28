@@ -19,6 +19,7 @@ function SignUp() {
   const [fifthStep, setFifthStep] = useState(false)
   const [sixthStep, setSixthStep] = useState(false)
   const [userInformation, setUserInformation] = useState()
+  const [userPhoto, setUserPhoto] = useState()
   const navigate = useNavigate()
 
   const createAccount = () => {
@@ -136,16 +137,21 @@ function SignUp() {
         setFirstStep={setFirstStep}
         setFourthStep={setFourthStep}
         setFifthStep={setFifthStep}
-        setUserInformation={setUserInformation}
         userInformation={userInformation}
       />
     )
   }
   if (fifthStep) {
-    return <FifthStep setFifthStep={setFifthStep} setSixthStep={setSixthStep} />
+    return (
+      <FifthStep
+        setFifthStep={setFifthStep}
+        setSixthStep={setSixthStep}
+        setUserPhoto={setUserPhoto}
+      />
+    )
   }
   if (sixthStep) {
-    return <SixthStep />
+    return <SixthStep userInformation={userInformation} userPhoto={userPhoto} />
   }
 }
 

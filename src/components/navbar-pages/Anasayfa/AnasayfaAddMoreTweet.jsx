@@ -8,7 +8,7 @@ import AnasayfaContext from "../../context/AnasayfaContext"
 // Tweet Area'daki alt kısım
 import ProgressBarArea from "./templates/ProgressBarArea"
 
-function AnasayfaAddMoreTweet() {
+function AnasayfaAddMoreTweet(props) {
   //context
   const { setHomePageOpacity, textValue, setTextValue } =
     useContext(AnasayfaContext)
@@ -38,7 +38,7 @@ function AnasayfaAddMoreTweet() {
   const [textValueLength, setTextValueLength] = useState("")
 
   // açılır kapanır toggle
-  const { ref, isComponentVisible, setIsComponentVisible } =
+  const { reference, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false)
   const { ref2, isComponentVisible2, setIsComponentVisible2 } =
     useComponentVisible2(false)
@@ -130,8 +130,12 @@ function AnasayfaAddMoreTweet() {
           }`}
         >
           <img
-            className="rounded-3xl m-3"
-            src="https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
+            className="rounded-full m-3 w-12 h-12"
+            src={
+              props.profilePhoto !== ""
+                ? props.profilePhoto
+                : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
+            }
             width="40px"
             height="40px"
             alt=""
@@ -140,7 +144,7 @@ function AnasayfaAddMoreTweet() {
             <div className={tweetOpacity ? "hidden" : "relative z-50"}>
               <p
                 onClick={everyoneClick}
-                ref={ref}
+                ref={reference}
                 className={`${
                   openTextArea ? "inline-block" : "hidden"
                 } inline-block rounded-3xl border px-3 text-sky-500 font-semibold cursor-pointer hover:bg-sky-100`}
@@ -239,7 +243,7 @@ function AnasayfaAddMoreTweet() {
           </div>
         </div>
         {!tweetOpacity & closeAddNewTweet ? (
-          <div className="h-[165px] w-[2px] bg-gray-300 absolute top-[83px] left-[30px]"></div>
+          <div className="h-[160px] w-[2px] bg-gray-300 absolute top-[90px] left-[35px]"></div>
         ) : null}
         <div
           onClick={newTweetClick}
@@ -249,8 +253,12 @@ function AnasayfaAddMoreTweet() {
         >
           <div>
             <img
-              className="rounded-3xl m-3"
-              src="https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
+              className="rounded-full m-3 w-12 h-12"
+              src={
+                props.profilePhoto !== ""
+                  ? props.profilePhoto
+                  : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
+              }
               width="40px"
               height="40px"
               alt=""

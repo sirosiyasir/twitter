@@ -1,7 +1,4 @@
 import { useState } from "react"
-// error vb kutucuklar oluşturmak için toastify'ı kullanıyorum
-import { toast } from "react-toastify"
-// firebase'i import ediyorum
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -9,11 +6,11 @@ import {
 } from "firebase/auth"
 import { setDoc, doc, serverTimestamp } from "firebase/firestore"
 import { db } from "../../firebase.config"
-
+// error vb kutucuklar oluşturmak için toastify'ı kullanıyorum
+import { toast } from "react-toastify"
 function FourthStep(props) {
   const [password, setPassword] = useState("")
   const [passwordCorrect, setPasswordCorrect] = useState(true)
-  const [registrationCorrect, setRegistrationCorrect] = useState(false)
 
   const passwordOnClick = () => {
     setPasswordCorrect((prevState) => {
@@ -24,6 +21,7 @@ function FourthStep(props) {
     setPassword(e.target.value)
   }
 
+  // Sign-up sayfalarının tamamından aldığım kullanıcı bilgilerini son kayıt aşamasında Firebase'e gönderiyorum
   const createUser = async () => {
     try {
       const auth = getAuth()
@@ -39,15 +37,20 @@ function FourthStep(props) {
         displayName: props.userInformation.name,
       })
 
-      const userInformationCopy = { ...props.userInformation, password }
+      const userInformationCopy = {
+        ...props.userInformation,
+        password,
+      }
       delete userInformationCopy.password
       userInformationCopy.timestamp = serverTimestamp()
 
       await setDoc(doc(db, "users", user.uid), userInformationCopy)
+
       props.setFourthStep(false)
       props.setFifthStep(true)
     } catch (error) {
       toast.error("Something went wrong with registration")
+      console.log(error)
     }
   }
 
