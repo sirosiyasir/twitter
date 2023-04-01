@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
 // div dışında herhangi yere tıklanıldığı zaman açılır-kapanır bir div oluşturmak için
 import useComponentVisible from "../toggle-component/useComponentVisible"
 

@@ -18,6 +18,7 @@ function Profile() {
   const [textValue, setTextValue] = useState("")
   const [name, setName] = useState("")
   const [profilePhoto, setProfilePhoto] = useState("")
+  const [tweets, setTweets] = useState([])
 
   const navigate = useNavigate()
   useEffect(() => {
@@ -41,7 +42,14 @@ function Profile() {
 
   return (
     <AnasayfaContext.Provider
-      value={{ homePageOpacity, setHomePageOpacity, textValue, setTextValue }}
+      value={{
+        homePageOpacity,
+        setHomePageOpacity,
+        textValue,
+        setTextValue,
+        setTweets,
+        tweets,
+      }}
     >
       <div>
         <div
@@ -56,7 +64,9 @@ function Profile() {
               profilePhoto={profilePhoto}
             />
             {/* <div className="flex-auto w-64">{[navbarClick]}</div> */}
-            {navbarClick === "home" && <Anasayfa profilePhoto={profilePhoto} />}
+            {navbarClick === "home" && (
+              <Anasayfa profilePhoto={profilePhoto} name={name} />
+            )}
             {navbarClick === "hashtag" && <Keşfet />}
             <div className="flex-auto w-32 bg-gray-100 2xl:mx-14 md:mx-4">
               3

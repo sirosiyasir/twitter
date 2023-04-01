@@ -1,6 +1,17 @@
-import React from "react"
-
+// Home.jsx'te kurduğum context sayesinde anasayfayı ilgilendiren tüm jsx'lere ulaşabiliyorum
+import { useContext } from "react"
+import AnasayfaContext from "../../../context/AnasayfaContext"
 function ProgressBarArea(props) {
+  const { setTweets } = useContext(AnasayfaContext)
+  const shareTweet = () => {
+    // Tweet'leri array'e kaydediyor ve daha sonra .map yöntemiyle her birine kolayca bir jsx oluşturuyorum(CreateTweet.js)
+    setTweets((prevState) => {
+      return [...prevState, props.tweet.slice(0, 280)]
+    })
+    // kullanıcı tweet'ini paylaştıktan sonra tweet area'dan yazdığı tweet'i siliyorum
+    props.setTweet("")
+  }
+
   return (
     <div>
       <div className="mt-4 mb-2 grid grid-cols-2 gap-16">
@@ -40,6 +51,7 @@ function ProgressBarArea(props) {
               ></i>
             </div>
             <button
+              onClick={shareTweet}
               disabled={!props.textAreaValueCheck}
               className="text-md bg-sky-500 text-white font-semibold rounded-3xl px-[14px] py-[6px] disabled:bg-sky-300"
             >

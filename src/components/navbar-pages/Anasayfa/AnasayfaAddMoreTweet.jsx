@@ -95,8 +95,8 @@ function AnasayfaAddMoreTweet(props) {
   }
   // ilk tweet textarea onChange'i
   const textAreaOnChange = (e) => {
-    setTextValue(e.target.value)
     if (e.target.value !== "") {
+      setTextValue(e.target.value)
       setTextAreaValueCheck(true)
     } else if (e.target.value === "") {
       setTextAreaValueCheck(false)
@@ -259,8 +259,6 @@ function AnasayfaAddMoreTweet(props) {
                   ? props.profilePhoto
                   : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
               }
-              width="40px"
-              height="40px"
               alt=""
             />
           </div>

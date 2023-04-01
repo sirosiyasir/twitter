@@ -9,11 +9,13 @@ import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 import ProgressBarArea from "./templates/ProgressBarArea"
 
 function AnasayfaTextArea(props) {
-  const { setHomePageOpacity, setTextValue } = useContext(AnasayfaContext)
+  const { setHomePageOpacity } = useContext(AnasayfaContext)
   // Tweet yazma bölgesine tıklandığında gerekli bazı yerlerin ortaya çıkması için openTextArea
   const [openTextArea, setOpenTextArea] = useState(false)
   // Textarea'ya yazılan değerin uzunluğunu yakalamak için
   const [textValueLength, setTextValueLength] = useState("")
+  // yazılan tweet'i tweet'le butonuna basıldığı zaman paylaşmak için "tweet" state'inde tutuyorum
+  const [tweet, setTweet] = useState("")
   // 280 kelimelik sınırın aşıldığını belirtmek için overText
   const [overText, setOverText] = useState("")
   // Progress Bar'ın text area'daki durumunu değiştirebilmek için
@@ -40,7 +42,7 @@ function AnasayfaTextArea(props) {
   //Text area'ya girilen değerler için progress bar'ı etkinleştirmek ve button'ı disabled'dan çekmek vb için
   const textAreaChange = (e) => {
     if (e.target.value !== "") {
-      setTextValue(e.target.value)
+      setTweet(e.target.value)
       setTextAreaValueCheck(true)
     } else if (e.target.value === "") {
       setTextAreaValueCheck(false)
@@ -122,7 +124,8 @@ function AnasayfaTextArea(props) {
         <textarea
           onChange={textAreaChange}
           onClick={textAreaOnClick}
-          className="block w-full resize-none outline-none mt-5 placeholder:text-xl"
+          value={tweet}
+          className="block w-full h-auto resize-none outline-none mt-5 placeholder:text-xl break-words"
           placeholder="Neler oluyor?"
         ></textarea>
         <div
@@ -176,6 +179,8 @@ function AnasayfaTextArea(props) {
           textAreaValueCheck={textAreaValueCheck}
           overText={overText}
           addMoreTweetClick={addMoreTweetClick}
+          tweet={tweet}
+          setTweet={setTweet}
         />
       </div>
     </div>
