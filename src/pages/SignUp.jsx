@@ -9,6 +9,7 @@ import ThirdStep from "../components/sign-up-step/ThirdStep"
 import FourthStep from "../components/sign-up-step/FourthStep"
 import FifthStep from "../components/sign-up-step/FifthStep"
 import SixthStep from "../components/sign-up-step/SixthStep"
+import XMark from "../components/XMark"
 
 function SignUp() {
   const [signUp, setSignUp] = useState(false)
@@ -27,12 +28,16 @@ function SignUp() {
     setSignUp(true)
   }
 
+  const xMarkOnClick = () => {
+    navigate("/")
+  }
+
   if (!signUp) {
     return (
       <div className="bg-gray-300 grid h-screen place-items-center">
         <div className="card bg-white w-[37rem] h-[38rem] relative">
           <div className="m-2 text-center">
-            <i className="fa-solid fa-xmark absolute left-4 text-black"></i>
+            <XMark onClick={xMarkOnClick} />
             <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
           </div>
           <h1 className="text-black text-left mx-auto mt-8 mb-4 pr-10 text-3xl font-bold w-72">

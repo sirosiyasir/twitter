@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
+import XMark from "../components/XMark"
 import FirstStep from "../components/sign-in-step/FirstStep"
 
 function SignIn() {
@@ -26,7 +27,7 @@ function SignIn() {
       <div className="bg-gray-300 grid h-screen place-items-center">
         <div className="card bg-white w-[37rem] h-[38rem] relative">
           <div className="m-2 text-center">
-            <i className="fa-solid fa-xmark absolute left-4 text-black cursor-pointer"></i>
+            <XMark />
             <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
           </div>
           <h1 className="text-black text-center mt-8 mb-4 pr-10 text-3xl font-bold">
@@ -60,7 +61,12 @@ function SignIn() {
               İleri
             </button>
           </form>
-          <button className="text-black border border-gray-300 w-[19rem] rounded-3xl mx-auto mb-3 px-4 py-2 font-bold">
+          <button
+            onClick={() => {
+              navigate("/forgot-password")
+            }}
+            className="text-black border border-gray-300 w-[19rem] rounded-3xl mx-auto mb-3 px-4 py-2 font-bold"
+          >
             Şifreni mi unuttun ?
           </button>
           <p className="text-gray-500 text-center mt-7 pr-10">

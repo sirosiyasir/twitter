@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 // context
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
+import XMark from "../XMark"
 // props'ları kullanarak function'ları bir sayfadan başka bir sayfaya aktarıyorum
 function FirstStep(props) {
   const [buttonActive, setButtonActive] = useState(true)
@@ -17,6 +18,10 @@ function FirstStep(props) {
   const date = new Date()
   const year = date.getFullYear()
   const navigate = useNavigate()
+
+  const xMarkOnClick = () => {
+    navigate("/")
+  }
 
   const onChange = (e) => {
     setInformation((prevState) => ({
@@ -44,12 +49,7 @@ function FirstStep(props) {
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
       <div className="card bg-white w-[37rem] h-[38rem] relative">
-        <i
-          onClick={() => {
-            navigate("/")
-          }}
-          className="text-black fa-solid fa-xmark absolute left-4 top-4 cursor-pointer"
-        ></i>
+        <XMark onClick={xMarkOnClick} />
         <h2 className="text-black absolute left-12 top-2 font-semibold text-xl">
           Adım 1/4
         </h2>

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 // error vb kutucuklar oluşturmak için toastify'ı kullanıyorum
 import { toast } from "react-toastify"
+import XMark from "../XMark"
 function FirstStep(props) {
   const navigate = useNavigate()
   const [passwordCorrect, setPasswordCorrect] = useState(true)
@@ -13,7 +14,10 @@ function FirstStep(props) {
       return !prevState
     })
   }
-
+  const xMarkOnCLick = () => {
+    props.setFirstStep(false)
+    props.setSignIn(true)
+  }
   const onChange = (e) => {
     setPassword(e.target.value)
   }
@@ -41,13 +45,7 @@ function FirstStep(props) {
     <div className="bg-gray-300 grid h-screen place-items-center">
       <div className="card bg-white w-[37rem] h-[38rem] relative">
         <div className="m-2 text-center">
-          <i
-            onClick={() => {
-              props.setFirstStep(false)
-              props.setSignIn(true)
-            }}
-            className="text-black fa-solid fa-xmark absolute left-4 cursor-pointer"
-          ></i>
+          <XMark onClick={xMarkOnCLick} />
           <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
         </div>
         <h1 className="text-black text-left mx-auto mt-6 pr-10 text-3xl font-bold w-[29.5rem]">
@@ -71,7 +69,12 @@ function FirstStep(props) {
               onClick={passwordOnClick}
               className="fa-regular fa-eye absolute right-5 top-7 cursor-pointer"
             ></i>
-            <p className="text-sky-500 hover:underline cursor-pointer text-left ml-1 my-1 text-xs">
+            <p
+              onClick={() => {
+                navigate("/forgot-password")
+              }}
+              className="text-sky-500 hover:underline cursor-pointer text-left ml-1 my-1 text-xs"
+            >
               Şifreni mi unuttun?
             </p>
             <button className="bg-black w-[28rem] mt-44 h-14 rounded-3xl mx-auto mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500">
