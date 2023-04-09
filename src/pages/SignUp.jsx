@@ -10,6 +10,7 @@ import FourthStep from "../components/sign-up-step/FourthStep"
 import FifthStep from "../components/sign-up-step/FifthStep"
 import SixthStep from "../components/sign-up-step/SixthStep"
 import XMark from "../components/XMark"
+import Oauth from "../components/Oauth"
 
 function SignUp() {
   const [signUp, setSignUp] = useState(false)
@@ -43,12 +44,7 @@ function SignUp() {
           <h1 className="text-black text-left mx-auto mt-8 mb-4 pr-10 text-3xl font-bold w-72">
             Bugün Twitter'a katıl
           </h1>
-          <div className="border-gray-400 border w-[19rem] rounded-3xl mx-auto mt-5 mb-4 px-4 py-2  cursor-pointer">
-            <p className="text-center">
-              <i className="fa-brands fa-google pr-2 text-black"></i>
-              <span className="text-gray-500">Google ile kaydolun</span>
-            </p>
-          </div>
+          <Oauth />
           <div className="border-gray-400 border w-[19rem] rounded-3xl mx-auto my-2 px-4 py-2 cursor-pointer ">
             <p className="text-black text-center font-bold">
               <i className="fa-brands fa-apple pr-2 "></i>Apple ile kaydol

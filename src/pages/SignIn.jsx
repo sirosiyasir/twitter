@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import XMark from "../components/XMark"
 import FirstStep from "../components/sign-in-step/FirstStep"
+import Oauth from "../components/Oauth"
 
 function SignIn() {
   const [email, setEmail] = useState("")
@@ -33,13 +34,8 @@ function SignIn() {
           <h1 className="text-black text-center mt-8 mb-4 pr-10 text-3xl font-bold">
             Twitter'a Giriş Yap
           </h1>
-          <div className="border-gray-300 border w-[19rem] rounded-3xl mx-auto mt-5 mb-4 px-4 py-2  cursor-pointer">
-            <p className="text-black text-center">
-              <i className="fa-brands fa-google pr-2"></i>
-              <span className="text-gray-500">Google ile oturum açın</span>
-            </p>
-          </div>
-          <div className="border-gray-300 border w-[19rem] rounded-3xl mx-auto my-2 px-4 py-2 cursor-pointer ">
+          <Oauth />
+          <div className="border-gray-400 border w-[19rem] rounded-3xl mx-auto my-2 px-4 py-2 cursor-pointer ">
             <p className="text-black text-center font-bold">
               <i className="fa-brands fa-apple pr-2 "></i>Apple ile giriş yap
             </p>
