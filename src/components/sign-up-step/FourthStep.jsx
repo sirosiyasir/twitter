@@ -56,12 +56,12 @@ function FourthStep(props) {
 
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
-      <div className="card bg-white w-[37rem] h-[38rem] relative">
+      <div className="card bg-white w-[37rem] h-[38rem] relative sign-up-card">
         <h2 className="text-black absolute left-4 top-2 font-semibold text-xl">
           Adım 4/4
         </h2>
         <div className="mx-auto mt-1 mb-0 pb-0 text-center">
-          <h1 className="text-black text-left mx-auto mt-16 text-3xl font-bold w-[29.5rem]">
+          <h1 className="text-black text-left mx-auto mt-16 text-3xl font-bold w-[29.5rem] sign-up-divs">
             Bir şifre girmen gerek
           </h1>
           <p className="text-gray-500 text-left mb-8 mt-1">
@@ -73,17 +73,17 @@ function FourthStep(props) {
               value={password}
               type={passwordCorrect ? "password" : "text"}
               id="name"
-              className="bg-white text-black border border-gray-300 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
+              className="bg-white text-black border border-gray-300 w-[29rem] sign-up-divs first-step-inputs h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
               placeholder="Şifre"
               min="8"
             />
             <i
               onClick={passwordOnClick}
-              className="fa-regular fa-eye absolute right-5 top-7 cursor-pointer"
+              className="fa-regular fa-eye absolute right-5 top-7 cursor-pointer fourth-step-password-eye"
             ></i>
           </div>
           <button
-            className="bg-black w-[28rem] mt-80 h-12 rounded-3xl mx-auto mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
+            className="bg-black w-[28rem] sign-up-divs mt-80 h-12 rounded-3xl mx-auto mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
             onClick={() => {
               createUser()
             }}

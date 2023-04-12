@@ -26,7 +26,7 @@ function SignIn() {
   if (signIn) {
     return (
       <div className="bg-gray-300 grid h-screen place-items-center">
-        <div className="card bg-white w-[37rem] h-[38rem] relative">
+        <div className="card bg-white w-[37rem] h-[38rem] relative sign-in-card">
           <div className="m-2 text-center">
             <XMark />
             <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>

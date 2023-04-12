@@ -30,23 +30,21 @@ function Navbar(props) {
   return (
     <div className="fixed flex-1 pt-4 h-screen w-[259px]">
       <div className="text-black">
-        <i className="fa-brands fa-twitter text-blue-500 text-2xl ml-2 inline-block cursor-pointer"></i>
+        <i className="fa-brands fa-twitter text-blue-500 text-2xl ml-[14px] inline-block cursor-pointer"></i>
 
         <button
           onClick={navbarOnCLick}
           id="home"
-          className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-36 h-12 mt-4 relative"
+          className="block hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 mt-4 relative"
         >
           <i
             id="home"
-            className="fa-solid fa-house text-2xl cursor-pointer absolute top-2 left-3"
+            className="fa-solid fa-house text-2xl cursor-pointer "
           ></i>
           <span
             id="home"
             className={
-              menuItems.home
-                ? "absolute top-[10px] right-[18px] text-lg font-semibold"
-                : "absolute top-[10px] right-[18px] text-lg"
+              menuItems.home ? "ml-4 text-lg font-semibold" : "ml-4 text-lg"
             }
           >
             Anasayfa
@@ -56,22 +54,22 @@ function Navbar(props) {
         <button
           onClick={navbarOnCLick}
           id="hashtag"
-          className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-32 h-12 mt-3 relative"
+          className="block hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 mt-3 relative"
         >
           <i
             id="hashtag"
             className={
               menuItems.hashtag
-                ? "fa-solid fa-hashtag text-2xl cursor-pointer absolute top-2 left-[14px]"
-                : "fa-regular fa-hashtag text-2xl cursor-pointer absolute top-2 left-[14px]"
+                ? "fa-solid fa-hashtag text-2xl cursor-pointer"
+                : "fa-regular fa-hashtag text-2xl cursor-pointer"
             }
           ></i>
           <span
             id="hashtag"
             className={
               menuItems.hashtag
-                ? "absolute top-[10px] right-6 text-lg font-semibold"
-                : "absolute top-[10px] right-6 text-lg"
+                ? " ml-6 text-lg font-semibold"
+                : " ml-6 text-lg"
             }
           >
             Keşfet
@@ -81,22 +79,20 @@ function Navbar(props) {
         <button
           onClick={navbarOnCLick}
           id="bell"
-          className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-40 h-12 mt-3 relative"
+          className="block hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 mt-3 relative"
         >
           <i
             id="bell"
             className={
               menuItems.bell
-                ? "fa-solid fa-bell text-2xl cursor-pointer absolute top-2 left-[14px]"
-                : "fa-regular fa-bell text-2xl cursor-pointer absolute top-2 left-[14px]"
+                ? "fa-solid fa-bell text-2xl cursor-pointer"
+                : "fa-regular fa-bell text-2xl cursor-pointer"
             }
           ></i>
           <span
             id="bell"
             className={
-              menuItems.bell
-                ? "absolute top-[10px] right-[24px] text-lg font-semibold"
-                : "absolute top-[10px] right-[24px] text-lg"
+              menuItems.bell ? "ml-6 text-lg font-semibold" : "ml-6 text-lg"
             }
           >
             Bildirimler
@@ -106,22 +102,22 @@ function Navbar(props) {
         <button
           onClick={navbarOnCLick}
           id="envelope"
-          className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-36 h-12 mt-3 relative"
+          className="block hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 mt-3 relative"
         >
           <i
             id="envelope"
             className={
               menuItems.envelope
-                ? "fa-solid fa-envelope text-2xl cursor-pointer absolute top-2 left-3"
-                : "fa-regular fa-envelope text-2xl cursor-pointer absolute top-2 left-3"
+                ? "fa-solid fa-envelope text-2xl cursor-pointer "
+                : "fa-regular fa-envelope text-2xl cursor-pointer "
             }
           ></i>
           <span
             id="envelope"
             className={
               menuItems.envelope
-                ? "absolute top-[10px] right-5 text-lg font-semibold"
-                : "absolute top-[10px] right-5 text-lg"
+                ? "ml-[22px] text-lg font-semibold"
+                : "ml-[22px] text-lg"
             }
           >
             Mesajlar
@@ -131,22 +127,20 @@ function Navbar(props) {
         <button
           onClick={navbarOnCLick}
           id="bookmark"
-          className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-44 h-12 mt-3 relative"
+          className="block hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 mt-3 ml-[2px] relative"
         >
           <i
             id="bookmark"
             className={
               menuItems.bookmark
-                ? "fa-solid fa-bookmark text-2xl cursor-pointer absolute top-2 left-[14px]"
-                : "fa-regular fa-bookmark text-2xl cursor-pointer absolute top-2 left-[14px]"
+                ? "fa-solid fa-bookmark text-2xl cursor-pointer "
+                : "fa-regular fa-bookmark text-2xl cursor-pointer "
             }
           ></i>
           <span
             id="bookmark"
             className={
-              menuItems.bookmark
-                ? "absolute top-[10px] right-[22px] text-lg font-semibold"
-                : "absolute top-[10px] right-[22px] text-lg"
+              menuItems.bookmark ? "ml-7 text-lg font-semibold" : "ml-7 text-lg"
             }
           >
             Yer İşaretleri
@@ -156,22 +150,22 @@ function Navbar(props) {
         <button
           onClick={navbarOnCLick}
           id="clipboard"
-          className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-32 h-12 mt-3 relative"
+          className="block hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 mt-3 ml-[2px] relative"
         >
           <i
             id="clipboard"
             className={
               menuItems.clipboard
-                ? "fa-solid fa-clipboard text-2xl cursor-pointer absolute top-2 left-[14px]"
-                : "fa-regular fa-clipboard text-2xl cursor-pointer absolute top-2 left-[14px]"
+                ? "fa-solid fa-clipboard text-2xl cursor-pointer"
+                : "fa-regular fa-clipboard text-2xl cursor-pointer"
             }
           ></i>
           <span
             id="clipboard"
             className={
               menuItems.clipboard
-                ? "absolute top-[10px] right-[13px] text-lg font-semibold"
-                : "absolute top-[10px] right-[13px] text-lg"
+                ? "ml-[30px] text-lg font-semibold"
+                : "ml-[30px] text-lg"
             }
           >
             Listeler
@@ -181,22 +175,20 @@ function Navbar(props) {
         <button
           onClick={navbarOnCLick}
           id="profile"
-          className="block hover:bg-slate-200 rounded-3xl pl-0 p-2 w-32 h-12 mt-3 relative"
+          className="block hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 mt-3 relative"
         >
           <i
             id="profile"
             className={
               menuItems.profile
-                ? "fa-solid fa-user text-2xl cursor-pointer absolute top-2 left-[12px]"
-                : "fa-regular fa-user text-2xl cursor-pointer absolute top-2 left-[12px]"
+                ? "fa-solid fa-user text-2xl cursor-pointer "
+                : "fa-regular fa-user text-2xl cursor-pointer "
             }
           ></i>
           <span
             id="profile"
             className={
-              menuItems.profile
-                ? "absolute top-[10px] right-[27px] text-lg font-semibold"
-                : "absolute top-[10px] right-[27px] text-lg"
+              menuItems.profile ? "ml-7 text-lg font-semibold" : "ml-7 text-lg"
             }
           >
             Profil
@@ -207,10 +199,10 @@ function Navbar(props) {
           {!isComponentVisible && (
             <button
               onClick={menuMoreOnClick}
-              className="hover:bg-slate-200 rounded-3xl w-44 h-12 relative"
+              className="hover:bg-slate-200 rounded-full px-3 py-2 w-auto h-12 relative"
             >
-              <i className="fa-solid fa-ellipsis text-md cursor-pointer p-[2px] border-2 border-black rounded-3xl absolute top-[12px] left-3"></i>
-              <span className="text-md text-lg font-sans font-normal absolute top-2 right-[34px]">
+              <i className="fa-solid fa-ellipsis text-md cursor-pointer p-[2px] border-2 border-black rounded-full"></i>
+              <span className="text-md text-lg font-sans font-normal navbar-more ml-[26px]">
                 Daha fazla
               </span>
             </button>
@@ -286,12 +278,16 @@ function Navbar(props) {
             </div>
           )}
         </div>
+        <button className="bg-sky-500 w-auto h-14 rounded-full mr-auto mt-7 mb-0 px-[90px] py-2 text-white font-bold block hover:bg-sky-600 navbar-tweet-button">
+          Tweetle
+        </button>
+        <button className="bg-sky-500 mt-5 py-2 rounded-full px-3 text-2xl text-white block xl:hidden">
+          <i className="fa-solid fa-feather-pointed"></i>
+        </button>
       </div>
-      <button className="bg-sky-500 w-auto h-14 rounded-full mr-auto mt-7 mb-0 px-[90px] py-2 text-white font-bold block hover:bg-sky-600">
-        Tweetle
-      </button>
-      <button className="absolute hover:bg-slate-200 rounded-3xl px-2 w-auto h-[60px] text-right bottom-3 right-2">
-        <div className="flex flex-row w-max">
+
+      <button className="-ml-1 mt-16 hover:bg-slate-200 rounded-full px-2 w-auto block h-[60px] text-right">
+        <div className="flex flex-row">
           <div>
             <img
               src={
@@ -299,15 +295,15 @@ function Navbar(props) {
                   ? props.profilePhoto
                   : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
               }
-              className="w-10 h-10 rounded-3xl"
+              className="w-10 h-10 rounded-3xl mt-1"
               alt="twitterProfilePhoto"
             />
           </div>
-          <div className="px-5">
+          <div className="px-5 navbar-hesap-bilgileri">
             <p className="text-center font-bold w-auto">{props.name}</p>
             <p className="text-left">@sirosiyasir</p>
           </div>
-          <div className="mt-2">
+          <div className="mt-2 navbar-hesap-bilgileri">
             <i className="fa-solid fa-ellipsis text-2xl cursor-pointer"></i>
           </div>
         </div>

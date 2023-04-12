@@ -8,6 +8,71 @@
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+/* Daha fazla tweet ekleye tıklandığı zaman */
 .backdrop {
   background: rgba(0, 0, 0, 0.2);
+}
+@media screen and (max-width: 1189px) {
+  span#home,
+  span#hashtag,
+  span#bell,
+  span#envelope,
+  span#bookmark,
+  span#clipboard,
+  span#profile,
+  span.navbar-more,
+  .navbar-tweet-button,
+  .navbar-hesap-bilgileri {
+    display: none;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .home-page-trend-hashtags {
+    display: none;
+  }
+}
+@media screen and (max-width: 606px) {
+  .sign-in-card {
+    padding: 1.5rem;
+    width: auto;
+    height: auto;
+  }
+  .sign-in-first-step-div {
+    width: 18rem;
+  }
+  .sign-in-first-step-password-eye {
+    top: 6px;
+    right: 6px;
+  }
+  .sign-up-card {
+    padding: 1rem;
+    width: 352px;
+    height: auto;
+  }
+  .sign-up-checkmark-div {
+    margin-right: 2rem;
+  }
+  .sign-up-card .first-step-inputs {
+    width: 100%;
+  }
+  .sign-up-divs {
+    width: auto;
+    height: auto;
+  }
+  .sign-up-card select {
+    width: 30%;
+  }
+  .sign-up-card .third-step-divs {
+    width: 100%;
+  }
+  .sign-up-card .fourth-step-password-eye {
+    top: 6px;
+    right: 10px;
+  }
+  .sign-up-card .sixth-step-verified {
+    top: 20px;
+  }
+  .sign-up-card .sixth-step-input {
+    padding-top: 22px;
+  }
 }

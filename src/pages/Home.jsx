@@ -57,7 +57,7 @@ function Profile() {
             !homePageOpacity && "bg-white h-screen overflow-hidden"
           }`}
         >
-          <div className={`flex 2xl:px-[300px] md:px-[150px]`}>
+          <div className={`flex 2xl:px-[300px] md:px-[10px] xl:px-[150px]`}>
             <Navbar
               setNavbarClick={setNavbarClick}
               name={name}
@@ -68,7 +68,7 @@ function Profile() {
               <Anasayfa profilePhoto={profilePhoto} name={name} />
             )}
             {navbarClick === "hashtag" && <Keşfet />}
-            <div className="flex-auto w-32 bg-gray-100 2xl:mx-14 md:mx-4">
+            <div className="flex-auto w-32 bg-gray-100 2xl:mx-14 md:mx-4 home-page-trend-hashtags">
               3
             </div>
           </div>

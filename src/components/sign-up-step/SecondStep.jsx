@@ -1,7 +1,7 @@
 function SecondStep(props) {
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
-      <div className="card bg-white w-[37rem] h-[38rem] relative">
+      <div className="card bg-white w-[37rem] h-[38rem] relative sign-up-card">
         <i
           className="text-black fa-solid fa-arrow-left absolute left-4 top-4 cursor-pointer"
           onClick={() => {
@@ -12,15 +12,15 @@ function SecondStep(props) {
         <h2 className="text-black absolute left-12 top-2 font-semibold text-xl">
           Adım 2/5
         </h2>
-        <div className="w-[29.5rem] mx-auto">
-          <h1 className="text-black text-left mx-auto mt-16 mb-8 pr-10 text-3xl font-bold w-[29.5rem]">
+        <div className="w-[29.5rem] mx-auto sign-up-divs">
+          <h1 className="text-black text-left mx-auto mt-16 mb-8 pr-10 text-3xl font-bold sign-up-divs">
             Deneyimini özelleştir
           </h1>
-          <h6 className="text-black my-4 font-bold text-xl w-[28rem]">
+          <h6 className="text-black my-4 font-bold text-xl sign-up-divs">
             Twitter içeriğini web'de nerede gördüğünü takip et
           </h6>
           <div className="relative">
-            <p className="text-gray-600 w-[26rem] ">
+            <p className="text-gray-600 w-[26rem] sign-up-divs sign-up-checkmark-div">
               Twitter bu verileri deneyimini kişiselleştirmek için kullanır. Bu
               web gezintisi geçmişi hiçbir zaman adın, e-posta adresin veya
               telefon numaranla saklanmayacaktır.
@@ -37,7 +37,7 @@ function SecondStep(props) {
         </div>
 
         <button
-          className="bg-black w-[28rem] h-12 rounded-3xl mx-auto mt-20 mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
+          className="bg-black w-[28rem] sign-up-divs h-12 rounded-3xl mx-auto mt-20 mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
           onClick={() => {
             props.setSecondStep(false)
             props.setThirdStep(true)

@@ -43,16 +43,16 @@ function FirstStep(props) {
   }
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
-      <div className="card bg-white w-[37rem] h-[38rem] relative">
+      <div className="card bg-white w-[37rem] h-[38rem] relative sign-up-card">
         <div className="m-2 text-center">
           <XMark onClick={xMarkOnCLick} />
           <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
         </div>
-        <h1 className="text-black text-left mx-auto mt-6 pr-10 text-3xl font-bold w-[29.5rem]">
+        <h1 className="text-black text-left mx-auto mt-6 pr-10 text-3xl font-bold w-[29.5rem] sign-up-divs">
           Şifreni Gir
         </h1>
-        <div className="mx-auto mt-2 mb-0 pb-0 text-center">
-          <div className="bg-gray-50 border border-gray-100 w-[29rem] h-14 pl-2 pt-5 text-left my-7 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 relative">
+        <div className="mx-auto mt-2 mb-0 pb-0 text-center sign-in-first-step-div">
+          <div className="bg-gray-50 border border-gray-100 w-[29rem] sign-up-divs h-14 pl-2 pt-5 text-left my-7 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 relative">
             <p className="text-gray-300">{props.email}</p>
             <p className="text-gray-300 text-xs absolute top-1">
               Kullanıcı adı
@@ -62,12 +62,12 @@ function FirstStep(props) {
             <input
               onChange={onChange}
               type={passwordCorrect ? "password" : "text"}
-              className="bg-white text-black border border-gray-300 mt-6 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
+              className="bg-white text-black border border-gray-300 mt-6 w-[29rem] first-step-inputs sign-up-divs h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
               placeholder="Şifre"
             />
             <i
               onClick={passwordOnClick}
-              className="fa-regular fa-eye absolute right-5 top-7 cursor-pointer"
+              className="fa-regular fa-eye absolute right-5 top-7 cursor-pointer sign-in-first-step-password-eye"
             ></i>
             <p
               onClick={() => {
@@ -77,7 +77,7 @@ function FirstStep(props) {
             >
               Şifreni mi unuttun?
             </p>
-            <button className="bg-black w-[28rem] mt-44 h-14 rounded-3xl mx-auto mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500">
+            <button className="bg-black w-[28rem] sign-up-divs mt-44 h-14 rounded-3xl mx-auto mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500">
               Giriş yap
             </button>
           </form>

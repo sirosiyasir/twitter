@@ -11,12 +11,12 @@ function FifthStep(props) {
   }
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
-      <div className="card bg-white w-[37rem] h-[38rem] relative">
+      <div className="card bg-white w-[37rem] h-[38rem] relative sign-up-card">
         <div className="m-2 text-center">
           <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
         </div>
         <div className="mx-auto mb-0 pb-0 text-center">
-          <h1 className="text-black text-left mx-auto mt-5 text-3xl font-bold w-[29.5rem]">
+          <h1 className="text-black text-left mx-auto mt-5 text-3xl font-bold w-[29.5rem] sign-up-divs">
             Profil fotoğrafı seç
           </h1>
           <p className="text-gray-500 text-left mb-8 mt-1">
@@ -49,7 +49,7 @@ function FifthStep(props) {
             </div>
           </div>
           <button
-            className="bg-white w-[28rem] mt-32 h-12 rounded-3xl mx-auto mb-0 px-4 py-2 border border-gray-300 text-black font-bold block hover:bg-gray-300"
+            className="bg-white w-[28rem] sign-up-divs mt-32 h-12 rounded-3xl mx-auto mb-0 px-4 py-2 border border-gray-300 text-black font-bold block hover:bg-gray-300"
             onClick={() => {
               props.setFifthStep(false)
               props.setSixthStep(true)

@@ -47,19 +47,19 @@ function SixthStep(props) {
 
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
-      <div className="card bg-white w-[37rem] h-[38rem] relative">
+      <div className="card bg-white w-[37rem] h-[38rem] relative sign-up-card">
         <div className="m-2 text-center">
           <i className="fa-brands fa-twitter text-blue-400 text-3xl"></i>
         </div>
         <div className="mx-auto mt-3 mb-0 pb-0 text-center">
-          <h1 className="text-black text-left text-3xl font-bold w-[29.5rem]">
+          <h1 className="text-black text-left text-3xl font-bold w-[29.5rem] sign-up-divs">
             Kullanıcı adın ne olsun?
           </h1>
           <p className="text-gray-500 text-left mb-8 mt-2">
             kullanıcı_adın eşsizdir. Daha sonra burada her zaman
             değiştirebilirsin.
           </p>
-          <div className="relative w-[29rem]">
+          <div className="relative w-[29rem] sign-up-divs">
             <p
               className={`absolute top-2 left-2 text-sm font-semibold ${
                 inputFocus ? "text-sky-400" : null
@@ -83,14 +83,14 @@ function SixthStep(props) {
               value={userName}
               autoFocus
               type="text"
-              className={`"bg-white text-black border border-gray-300 w-full h-14 pt-[18px] pl-6 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 focus:${() => {
+              className={`"bg-white text-black border border-gray-300 w-full sixth-step-input sign-up-divs first-step-inputs h-14 pt-[18px] pl-6 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400 focus:${() => {
                 setInputFocus(true)
               }}"`}
               min="8"
             />
             <i
-              className={`fa-solid fa-circle-check absolute right-8 top-6 cursor-pointer ${
-                userName.length > 4 ? "text-green-700" : null
+              className={`fa-solid fa-circle-check absolute right-8 top-6 cursor-pointer sixth-step-verified ${
+                userName.length >= 4 ? "text-green-700" : null
               }`}
             ></i>
             <div className="flex gap-1 text-left text-sm text-sky-400 mt-5">
@@ -104,7 +104,7 @@ function SixthStep(props) {
           </div>
         </div>
         <button
-          className="bg-white w-[28rem] h-12 rounded-3xl absolute bottom-6 left-[66px] border border-gray-300 text-black font-bold block hover:bg-gray-300"
+          className="bg-white w-[28rem] p-2 mt-60 sign-up-divs h-12 rounded-3xl mx-auto border border-gray-300 text-black font-bold block hover:bg-gray-300"
           onClick={() => {
             uploadUserPhoto()
             navigate("/")

@@ -48,12 +48,12 @@ function FirstStep(props) {
 
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
-      <div className="card bg-white w-[37rem] h-[38rem] relative">
+      <div className="card bg-white w-[37rem] h-[38rem] relative sign-up-card">
         <XMark onClick={xMarkOnClick} />
         <h2 className="text-black absolute left-12 top-2 font-semibold text-xl">
           Adım 1/4
         </h2>
-        <h1 className="text-black text-left mx-auto mt-16 pr-10 text-3xl font-bold w-[29.5rem]">
+        <h1 className="text-black text-left mx-auto mt-16 pr-10 text-3xl font-bold w-[29.5rem] sign-up-divs">
           Hesabını oluştur
         </h1>
         <div className="mx-auto mt-8 mb-0 pb-0 text-center">
@@ -61,24 +61,24 @@ function FirstStep(props) {
             type="text"
             onChange={onChange}
             id="name"
-            className="text-black bg-white border border-gray-300 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
+            className="text-black bg-white border border-gray-300 w-[29rem] sign-up-divs first-step-inputs h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
             placeholder="İsim"
           />
           <input
             type={MailOrPhone ? "email" : "number"}
             onChange={onChange}
             id="eMailOrPhone"
-            className="text-black bg-white border border-gray-300 mt-6 w-[29rem] h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
+            className="text-black bg-white border border-gray-300 mt-6 w-[29rem] sign-up-divs first-step-inputs h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
             placeholder={MailOrPhone ? "E-posta" : "Telefon"}
           />
           <p
-            className="text-sky-500 hover:underline cursor-pointer text-right my-3 w-28 ml-auto"
+            className="text-sky-500 hover:underline cursor-pointer text-right my-3 w-28 sign-up-divs ml-auto"
             onClick={useEmailOrPhone}
           >
             {!MailOrPhone ? "E-posta" : "Telefon"} kullan
           </p>
           <p className="text-black font-bold text-left">Doğum tarihi</p>
-          <p className="text-gray-500 text-left w-96 text-sm mt-1 mb-4">
+          <p className="text-gray-500 text-left w-96 sign-up-divs text-sm mt-1 mb-4">
             Bu, herkese açık olarak gösterilmeyecek. Bu hesap bir işletme, evcil
             hayvan veya başka bir şey için olsa bile kendi yaşını doğrulaman
             gerekir.
@@ -87,7 +87,7 @@ function FirstStep(props) {
             <select
               onChange={onChange}
               id="month"
-              className="text-black bg-white border border-gray-300 pl-2 pt-4 w-48 h-14 rounded focus:outline-none focus:border-blue-400 cursor-pointer appearance-none"
+              className="text-black bg-white border border-gray-300 pl-2 pt-4 w-48 sign-up-divs h-14 rounded focus:outline-none focus:border-blue-400 cursor-pointer appearance-none"
             >
               <option value=""></option>
               <option value="Ocak">Ocak</option>
@@ -110,7 +110,7 @@ function FirstStep(props) {
             <select
               onChange={onChange}
               id="day"
-              className="text-black bg-white border border-gray-300 mx-3 pl-2 pt-4 w-28 h-14 rounded focus:outline-none focus:border-blue-400 cursor-pointer appearance-none"
+              className="text-black bg-white border border-gray-300 mx-3 pl-2 pt-4 w-28 sign-up-divs h-14 rounded focus:outline-none focus:border-blue-400 cursor-pointer appearance-none"
             >
               <option value=""></option>
               <option value="1">1</option>
@@ -154,7 +154,7 @@ function FirstStep(props) {
             <select
               onChange={onChange}
               id="year"
-              className="text-black bg-white border border-gray-300 pl-2 pt-4 w-36 h-14 rounded focus:outline-none focus:border-blue-400 cursor-pointer appearance-none"
+              className="text-black bg-white border border-gray-300 pl-2 pt-4 w-36 sign-up-divs h-14 rounded focus:outline-none focus:border-blue-400 cursor-pointer appearance-none"
             >
               <option value=""></option>
               <option value={year}>{year}</option>
@@ -214,7 +214,7 @@ function FirstStep(props) {
           </div>
 
           <button
-            className="bg-black w-[28rem] h-12 rounded-3xl mx-auto mt-16 mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
+            className="bg-black w-[28rem] sign-up-divs h-12 rounded-3xl mx-auto mt-16 mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
             disabled={buttonActive}
             onClick={() => {
               props.setFirstStep(false)
