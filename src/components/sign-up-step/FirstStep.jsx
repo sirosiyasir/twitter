@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react"
-// context
+// Redux için gerekli function'ları import ediyorum
+import { useDispatch } from "react-redux"
+// reducer'ları import ediyorum
+import { setFirstStep, setSecondStep } from "../stores/steps"
+import { setUserInformation } from "../stores/userInfo"
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
 import XMark from "../XMark"
@@ -18,6 +22,7 @@ function FirstStep(props) {
   const date = new Date()
   const year = date.getFullYear()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const xMarkOnClick = () => {
     navigate("/")
@@ -43,8 +48,8 @@ function FirstStep(props) {
 
   // iyi bir state paylaşımı için useEffect kullanıyorum. Bu sayede yalnızca information değiştiğinde render edilecek
   useEffect(() => {
-    props.setUserInformation(information)
-  }, [information, props])
+    dispatch(setUserInformation(information))
+  }, [information, dispatch])
 
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
@@ -217,8 +222,8 @@ function FirstStep(props) {
             className="bg-black w-[28rem] sign-up-divs h-12 rounded-3xl mx-auto mt-16 mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
             disabled={buttonActive}
             onClick={() => {
-              props.setFirstStep(false)
-              props.setSecondStep(true)
+              dispatch(setFirstStep(false))
+              dispatch(setSecondStep(true))
             }}
           >
             İleri

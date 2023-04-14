@@ -1,3 +1,7 @@
+// Redux için gerekli function'ları import ediyorum
+import { useDispatch, useSelector } from "react-redux"
+// reducer'ları import ediyorum
+import { setFourthStep, setFifthStep } from "../stores/steps"
 import { useState } from "react"
 import {
   getAuth,
@@ -11,6 +15,8 @@ import { toast } from "react-toastify"
 function FourthStep(props) {
   const [password, setPassword] = useState("")
   const [passwordCorrect, setPasswordCorrect] = useState(true)
+  const { userInformations } = useSelector((state) => state.userInformations)
+  const dispatch = useDispatch()
 
   const passwordOnClick = () => {
     setPasswordCorrect((prevState) => {
@@ -27,18 +33,18 @@ function FourthStep(props) {
       const auth = getAuth()
       const userCredential = await createUserWithEmailAndPassword(
         auth,
-        props.userInformation.eMailOrPhone,
+        userInformations.eMailOrPhone,
         password
       )
 
       const user = userCredential.user
 
       updateProfile(auth.currentUser, {
-        displayName: props.userInformation.name,
+        displayName: userInformations.name,
       })
 
       const userInformationCopy = {
-        ...props.userInformation,
+        ...userInformations,
         password,
       }
       delete userInformationCopy.password
@@ -46,10 +52,12 @@ function FourthStep(props) {
 
       await setDoc(doc(db, "users", user.uid), userInformationCopy)
 
-      props.setFourthStep(false)
-      props.setFifthStep(true)
+      dispatch(setFourthStep(false))
+      dispatch(setFifthStep(true))
     } catch (error) {
-      toast.error("Something went wrong with registration")
+      toast.error(
+        "Kayıt olmakla ilgili bir prolem yaşandı. Bilgilerinizi kontrol ediniz"
+      )
       console.log(error)
     }
   }

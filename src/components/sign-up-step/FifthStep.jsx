@@ -1,7 +1,12 @@
+// Redux için gerekli function'ları import ediyorum
+import { useDispatch } from "react-redux"
+// reducer'ları import ediyorum
+import { setFifthStep } from "../stores/steps"
 import { useState } from "react"
 import profilePicture from "../../images/profile-picture.png"
 function FifthStep(props) {
   const [userProfilePicture, setUserProfilePicture] = useState("")
+  const dispatch = useDispatch()
 
   const loadFile = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -51,7 +56,7 @@ function FifthStep(props) {
           <button
             className="bg-white w-[28rem] sign-up-divs mt-32 h-12 rounded-3xl mx-auto mb-0 px-4 py-2 border border-gray-300 text-black font-bold block hover:bg-gray-300"
             onClick={() => {
-              props.setFifthStep(false)
+              dispatch(setFifthStep(false))
               props.setSixthStep(true)
             }}
           >

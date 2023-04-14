@@ -1,9 +1,13 @@
+// Redux için gerekli function'ları import ediyorum
+import { useSelector } from "react-redux"
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
-import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 import { storage } from "../../firebase.config"
 import { ref, uploadBytes } from "firebase/storage"
 import { getAuth } from "firebase/auth"
+// error vb kutucuklar oluşturmak için toastify'ı kullanıyorum
+import { toast } from "react-toastify"
 
 function SixthStep(props) {
   const [autoNames, setAutoNames] = useState({
@@ -14,6 +18,8 @@ function SixthStep(props) {
   const [realName, setRealName] = useState("")
   const [inputFocus, setInputFocus] = useState(false)
   const navigate = useNavigate()
+  const { userInformations } = useSelector((state) => state.userInformations)
+
   const onChangeInput = (e) => {
     setUserName(e.target.value)
   }
@@ -24,8 +30,8 @@ function SixthStep(props) {
         secondName: Math.floor(Math.random() * 1000),
       }
     })
-    setRealName(props.userInformation.name)
-  }, [props.userInformation.name])
+    setRealName(userInformations.name)
+  }, [userInformations.name])
 
   const uploadUserPhoto = () => {
     const auth = getAuth()
@@ -33,15 +39,10 @@ function SixthStep(props) {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-
-      if (props.userPhoto !== null) {
+      if (props.userPhoto !== undefined && "" && null) {
         const imageRef = ref(storage, `images/${"profilePhoto" + user.uid}`)
         uploadBytes(imageRef, props.userPhoto)
       }
-      // ...
-    } else {
-      // User is signed out
-      // ...
     }
   }
 
@@ -108,6 +109,7 @@ function SixthStep(props) {
           onClick={() => {
             uploadUserPhoto()
             navigate("/")
+            toast.success("Kayıt işlemi başarıyla gerçekleştirildi")
           }}
         >
           {userName.length < 4 ? "Şimdilik atla" : "Devam et"}

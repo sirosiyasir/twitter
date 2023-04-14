@@ -1,12 +1,17 @@
-function SecondStep(props) {
+// Redux için gerekli function'ları import ediyorum
+import { useDispatch } from "react-redux"
+// reducer'ları import ediyorum
+import { setFirstStep, setSecondStep, setThirdStep } from "../stores/steps"
+function SecondStep() {
+  const dispatch = useDispatch()
   return (
     <div className="bg-gray-300 grid h-screen place-items-center">
       <div className="card bg-white w-[37rem] h-[38rem] relative sign-up-card">
         <i
           className="text-black fa-solid fa-arrow-left absolute left-4 top-4 cursor-pointer"
           onClick={() => {
-            props.setFirstStep(true)
-            props.setSecondStep(false)
+            dispatch(setFirstStep(true))
+            dispatch(setSecondStep(false))
           }}
         ></i>
         <h2 className="text-black absolute left-12 top-2 font-semibold text-xl">
@@ -39,8 +44,8 @@ function SecondStep(props) {
         <button
           className="bg-black w-[28rem] sign-up-divs h-12 rounded-3xl mx-auto mt-20 mb-0 px-4 py-2 text-white font-bold block hover:bg-slate-800 disabled:bg-gray-500"
           onClick={() => {
-            props.setSecondStep(false)
-            props.setThirdStep(true)
+            dispatch(setSecondStep(false))
+            dispatch(setThirdStep(true))
           }}
         >
           İleri

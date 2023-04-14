@@ -2,6 +2,10 @@
 import React, { useState } from "react"
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
+// Redux için gerekli function'ları import ediyorum
+import { useSelector, useDispatch } from "react-redux"
+// reducer'ları import ediyorum
+import { setFirstStep } from "../components/stores/steps"
 // sign-up için gerekli sayfaları import ediyorum
 import FirstStep from "../components/sign-up-step/FirstStep"
 import SecondStep from "../components/sign-up-step/SecondStep"
@@ -14,18 +18,15 @@ import Oauth from "../components/Oauth"
 
 function SignUp() {
   const [signUp, setSignUp] = useState(false)
-  const [firstStep, setFirstStep] = useState(false)
-  const [secondStep, setSecondStep] = useState(false)
-  const [thirdStep, setThirdStep] = useState(false)
-  const [fourthStep, setFourthStep] = useState(false)
-  const [fifthStep, setFifthStep] = useState(false)
   const [sixthStep, setSixthStep] = useState(false)
-  const [userInformation, setUserInformation] = useState()
   const [userPhoto, setUserPhoto] = useState()
+  const { firstStep, secondStep, thirdStep, fourthStep, fifthStep } =
+    useSelector((state) => state.steps)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const createAccount = () => {
-    setFirstStep(true)
+    dispatch(setFirstStep(true))
     setSignUp(true)
   }
 
@@ -103,56 +104,22 @@ function SignUp() {
     )
   }
   if (firstStep) {
-    return (
-      <FirstStep
-        setFirstStep={setFirstStep}
-        setSecondStep={setSecondStep}
-        setUserInformation={setUserInformation}
-        userInformation={userInformation}
-      />
-    )
+    return <FirstStep />
   }
   if (secondStep) {
-    return (
-      <SecondStep
-        setFirstStep={setFirstStep}
-        setSecondStep={setSecondStep}
-        setThirdStep={setThirdStep}
-      />
-    )
+    return <SecondStep />
   }
   if (thirdStep) {
-    return (
-      <ThirdStep
-        setFirstStep={setFirstStep}
-        setSecondStep={setSecondStep}
-        setThirdStep={setThirdStep}
-        setFourthStep={setFourthStep}
-        userInformation={userInformation}
-      />
-    )
+    return <ThirdStep />
   }
   if (fourthStep) {
-    return (
-      <FourthStep
-        setFirstStep={setFirstStep}
-        setFourthStep={setFourthStep}
-        setFifthStep={setFifthStep}
-        userInformation={userInformation}
-      />
-    )
+    return <FourthStep />
   }
   if (fifthStep) {
-    return (
-      <FifthStep
-        setFifthStep={setFifthStep}
-        setSixthStep={setSixthStep}
-        setUserPhoto={setUserPhoto}
-      />
-    )
+    return <FifthStep setSixthStep={setSixthStep} setUserPhoto={setUserPhoto} />
   }
   if (sixthStep) {
-    return <SixthStep userInformation={userInformation} userPhoto={userPhoto} />
+    return <SixthStep userPhoto={userPhoto} />
   }
 }
 
