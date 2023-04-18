@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import Navbar from "../components/navbar/Navbar"
 import Anasayfa from "../components/navbar-pages/Anasayfa/Anasayfa"
-import Keşfet from "../components/navbar-pages/Keşfet"
+import Keşfet from "../components/navbar-pages/Keşfet/Keşfet"
 import AnasayfaAddMoreTweet from "../components/navbar-pages/Anasayfa/AnasayfaAddMoreTweet"
 //navigate
 import { useNavigate } from "react-router-dom"
@@ -10,6 +10,7 @@ import AnasayfaContext from "../components/context/AnasayfaContext"
 // firebase'den kullanıcı bilgilerini almak için getAuth'u import ediyorum
 import { getAuth } from "firebase/auth"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
+import RightSide from "../components/home-page-right-side/RightSide"
 
 function Profile() {
   const [navbarClick, setNavbarClick] = useState("home")
@@ -57,7 +58,7 @@ function Profile() {
             !homePageOpacity && "bg-white h-screen overflow-hidden"
           }`}
         >
-          <div className={`flex 2xl:px-[300px] md:px-[10px] xl:px-[150px]`}>
+          <div className="flex md:px-[75px] px-[0] home-page">
             <Navbar
               setNavbarClick={setNavbarClick}
               name={name}
@@ -68,9 +69,7 @@ function Profile() {
               <Anasayfa profilePhoto={profilePhoto} name={name} />
             )}
             {navbarClick === "hashtag" && <Keşfet />}
-            <div className="flex-auto w-32 bg-gray-100 2xl:mx-14 md:mx-4 home-page-trend-hashtags">
-              3
-            </div>
+            <RightSide />
           </div>
         </div>
         <div

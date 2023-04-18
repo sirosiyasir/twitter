@@ -9,11 +9,10 @@ import { motion, AnimatePresence } from "framer-motion"
 function Anasayfa(props) {
   const { tweets } = useContext(AnasayfaContext)
   return (
-    <div className="border-x-[1px] border-gray-100 md:ml-[100px] xl:ml-[265px] block w-[650px] mx-4">
+    <div className="border-x-[1px] border-gray-100 ml-[50px] md:ml-[100px] xl:ml-[265px] block w-[650px] mx-4">
       <AnasayfaNavbar />
       <div className="mt-32">
         <AnasayfaTextArea profilePhoto={props.profilePhoto} />
-
         <AnimatePresence>
           {tweets.map((tweet, index) => (
             <motion.div

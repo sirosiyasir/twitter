@@ -28,7 +28,7 @@ function Navbar(props) {
   }
 
   return (
-    <div className="fixed flex-1 pt-4 h-screen w-[259px]">
+    <div className="fixed pt-4 h-screen w-auto grid grid-rows-1">
       <div className="text-black">
         <i className="fa-brands fa-twitter text-blue-500 text-2xl ml-[14px] inline-block cursor-pointer"></i>
 
@@ -285,8 +285,7 @@ function Navbar(props) {
           <i className="fa-solid fa-feather-pointed"></i>
         </button>
       </div>
-
-      <button className="-ml-1 mt-16 hover:bg-slate-200 rounded-full px-2 w-auto block h-[60px] text-right">
+      <button className="-ml-1 mt-16 hover:bg-slate-200 rounded-full px-2 w-auto block h-[60px]">
         <div className="flex flex-row">
           <div>
             <img

@@ -12,7 +12,20 @@
 .backdrop {
   background: rgba(0, 0, 0, 0.2);
 }
-@media screen and (max-width: 1189px) {
+
+@media screen and (min-width: 1670px) {
+  .home-page {
+    padding-left: 300px;
+    padding-right: 300px;
+  }
+}
+@media screen and (min-width: 1400px) and (max-width: 1670px) {
+  .home-page {
+    padding-left: 150px;
+    padding-right: 150px;
+  }
+}
+@media screen and (max-width: 1280px) {
   span#home,
   span#hashtag,
   span#bell,
@@ -32,6 +45,10 @@
   }
 }
 @media screen and (max-width: 606px) {
+  .home-page {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .sign-in-card {
     padding: 1.5rem;
     width: auto;

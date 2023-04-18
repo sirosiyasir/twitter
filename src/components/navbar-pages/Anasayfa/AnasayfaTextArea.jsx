@@ -23,7 +23,7 @@ function AnasayfaTextArea(props) {
   // Progress Bar ve onunla birlikte açılacak olanların text area'daki value'ye göre belirlenmesi için
   const [textAreaValueCheck, setTextAreaValueCheck] = useState(false)
 
-  const { ref, isComponentVisible, setIsComponentVisible } =
+  const { reference, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false)
   const { ref2, isComponentVisible2, setIsComponentVisible2 } =
     useComponentVisible2(false)
@@ -82,7 +82,7 @@ function AnasayfaTextArea(props) {
         <div className="relative">
           <p
             onClick={everyoneClick}
-            ref={ref}
+            ref={reference}
             className={`${
               openTextArea ? "inline-block" : "hidden"
             } inline-block rounded-3xl border px-3 text-sky-500 font-semibold cursor-pointer hover:bg-sky-100`}
@@ -134,7 +134,7 @@ function AnasayfaTextArea(props) {
           ref={ref2}
         >
           {isComponentVisible2 && (
-            <div className="relative">
+            <div className="relative z-50">
               <div className="card bg-white w-[320px] h-[284px] shadow-lg absolute -left-16">
                 <div className="pt-[16px] px-[16px]">
                   <h1 className="text-xl font-semibold">Hedef kitle seç</h1>
@@ -176,6 +176,7 @@ function AnasayfaTextArea(props) {
         <ProgressBarArea
           progressBar={progressBar}
           textValueLength={textValueLength}
+          setTextValueLength={setTextValueLength}
           textAreaValueCheck={textAreaValueCheck}
           overText={overText}
           addMoreTweetClick={addMoreTweetClick}
