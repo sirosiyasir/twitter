@@ -10,7 +10,7 @@ import AnasayfaContext from "../components/context/AnasayfaContext"
 // firebase'den kullanıcı bilgilerini almak için getAuth'u import ediyorum
 import { getAuth } from "firebase/auth"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
-import RightSide from "../components/home-page-right-side/RightSide"
+import HomePageRightSide from "../components/home-page-right-side/HomePageRightSide"
 
 function Profile() {
   const [navbarClick, setNavbarClick] = useState("home")
@@ -58,7 +58,7 @@ function Profile() {
             !homePageOpacity && "bg-white h-screen overflow-hidden"
           }`}
         >
-          <div className="flex md:px-[75px] px-[0] home-page">
+          <div className="flex home-page">
             <Navbar
               setNavbarClick={setNavbarClick}
               name={name}
@@ -69,7 +69,7 @@ function Profile() {
               <Anasayfa profilePhoto={profilePhoto} name={name} />
             )}
             {navbarClick === "hashtag" && <Keşfet />}
-            <RightSide />
+            <HomePageRightSide />
           </div>
         </div>
         <div

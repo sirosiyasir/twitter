@@ -13,9 +13,9 @@ function AnasayfaNavbar() {
     setFirstBarUnderLine("block")
   }
   return (
-    <div className="my-background-color fixed z-10 flex flex-col">
+    <div className="my-background-color fixed z-10">
       <h1 className="text-2xl font-bold p-2">Anasayfa</h1>
-      <div className="grid grid-cols-6 gap-4 mt-5 cursor-pointer px-[132px]">
+      <div className="grid grid-cols-6 gap-4 mt-5 cursor-pointer px-[95px]">
         <div
           onClick={firstBarOnClick}
           className="col-start-1 col-end-3 relative text-center hover:bg-slate-200 pt-3"

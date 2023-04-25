@@ -281,11 +281,11 @@ function Navbar(props) {
         <button className="bg-sky-500 w-auto h-14 rounded-full mr-auto mt-7 mb-0 px-[90px] py-2 text-white font-bold block hover:bg-sky-600 navbar-tweet-button">
           Tweetle
         </button>
-        <button className="bg-sky-500 mt-5 py-2 rounded-full px-3 text-2xl text-white block xl:hidden">
+        <button className="bg-sky-500 mt-5 py-2 rounded-full px-3 ml-1 text-2xl text-white block xl:hidden">
           <i className="fa-solid fa-feather-pointed"></i>
         </button>
       </div>
-      <button className="-ml-1 mt-16 hover:bg-slate-200 rounded-full px-2 w-auto block h-[60px]">
+      <div className="-ml-1 mb-4 hover:bg-slate-200 rounded-full px-2 pt-2 w-auto block h-[60px]">
         <div className="flex flex-row">
           <div>
             <img
@@ -303,10 +303,10 @@ function Navbar(props) {
             <p className="text-left">@sirosiyasir</p>
           </div>
           <div className="mt-2 navbar-hesap-bilgileri">
-            <i className="fa-solid fa-ellipsis text-2xl cursor-pointer"></i>
+            <i className="fa-solid fa-ellipsis text-lg cursor-pointer ml-5"></i>
           </div>
         </div>
-      </button>
+      </div>
     </div>
   )
 }

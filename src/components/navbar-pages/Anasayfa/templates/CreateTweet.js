@@ -12,10 +12,10 @@ function CreateTweet(props) {
           alt=""
         />
         <div className="pt-3 w-[85%]">
-          <p className="font-semibold">
+          <p className="font-semibold relative">
             {props.name}{" "}
             <span className="text-sm text-gray-400">@sirosiyasir</span>
-            <i className="fa-solid fa-ellipsis absolute right-3 top-1"></i>
+            <i className="fa-solid fa-ellipsis absolute right-3 top-1 text-gray-500"></i>
           </p>
 
           <div className="relative h-max break-words">{props.tweet}</div>

@@ -41,8 +41,8 @@ function AnasayfaTextArea(props) {
   }
   //Text area'ya girilen değerler için progress bar'ı etkinleştirmek ve button'ı disabled'dan çekmek vb için
   const textAreaChange = (e) => {
+    setTweet(e.target.value)
     if (e.target.value !== "") {
-      setTweet(e.target.value)
       setTextAreaValueCheck(true)
     } else if (e.target.value === "") {
       setTextAreaValueCheck(false)
