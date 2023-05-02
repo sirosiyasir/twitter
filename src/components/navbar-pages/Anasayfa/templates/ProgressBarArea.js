@@ -1,6 +1,14 @@
 // Home.jsx'te kurduğum context sayesinde anasayfayı ilgilendiren tüm jsx'lere ulaşabiliyorum
-import { useContext } from "react"
+import { useContext, useState, useRef, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import AnasayfaContext from "../../../context/AnasayfaContext"
+
+//firebase
+import { collection, addDoc, serverTimestamp } from "firebase/firestore"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { db } from "../../../../firebase.config"
+import { getStorage, ref, getDownloadURL } from "firebase/storage"
+
 function ProgressBarArea({
   setTweet,
   tweet,
@@ -12,7 +20,49 @@ function ProgressBarArea({
   setTextValueLength,
 }) {
   const { setTweets } = useContext(AnasayfaContext)
-  const shareTweet = () => {
+  const [profilePhoto, setProfilePhoto] = useState("")
+  const [formData, setFormData] = useState({
+    share: 0,
+    retweet: 0,
+    nickname: "sirosiyasir",
+    like: 15,
+    interaction: 0,
+    comment: 10,
+  })
+
+  const auth = getAuth()
+  const navigate = useNavigate()
+  const isMounted = useRef(true)
+
+  useEffect(() => {
+    if (isMounted) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const storage = getStorage()
+          getDownloadURL(ref(storage, `images/${"profilePhoto" + user.uid}`))
+            .then((url) => {
+              setProfilePhoto(url)
+            })
+            .catch((error) => {
+              console.log(error)
+            })
+          setFormData({
+            ...formData,
+            userRef: user.uid,
+            name: user.reloadUserInfo.displayName,
+          })
+        } else {
+          navigate("/")
+        }
+      })
+    }
+    return () => {
+      isMounted.current = false
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMounted])
+
+  const shareTweet = async () => {
     // Tweet'leri array'e kaydediyor ve daha sonra .map yöntemiyle her birine kolayca bir jsx oluşturuyorum(CreateTweet.js)
     setTweets((prevState) => {
       return [...prevState, tweet.slice(0, 280)]
@@ -20,6 +70,16 @@ function ProgressBarArea({
     // kullanıcı tweet'ini paylaştıktan sonra tweet area'dan yazdığı tweet'i siliyorum
     setTweet("")
     setTextValueLength("")
+
+    //Firebase Cloud Store'a gerekli bilgileri ekliyorum
+    const formDataCopy = {
+      ...formData,
+      profilePhoto: profilePhoto,
+      userTweet: tweet.slice(0, 280),
+      timestamp: serverTimestamp(),
+    }
+
+    await addDoc(collection(db, "listings"), formDataCopy)
   }
 
   return (

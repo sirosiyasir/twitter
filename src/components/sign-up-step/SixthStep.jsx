@@ -3,8 +3,7 @@ import { useSelector } from "react-redux"
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { storage } from "../../firebase.config"
-import { ref, uploadBytes } from "firebase/storage"
+import { ref, uploadBytes, getStorage } from "firebase/storage"
 import { getAuth } from "firebase/auth"
 // error vb kutucuklar oluşturmak için toastify'ı kullanıyorum
 import { toast } from "react-toastify"
@@ -36,12 +35,18 @@ function SixthStep(props) {
   const uploadUserPhoto = () => {
     const auth = getAuth()
     const user = auth.currentUser
+
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      if (props.userPhoto !== undefined && "" && null) {
+      if (props.userPhoto !== undefined || "" || null) {
+        const storage = getStorage()
         const imageRef = ref(storage, `images/${"profilePhoto" + user.uid}`)
         uploadBytes(imageRef, props.userPhoto)
+        navigate("/")
+        toast.success("Kayıt işlemi başarıyla gerçekleştirildi")
+      } else {
+        toast.error("Kayıt işlemiyle ilgili bir problem gerçekleşti")
       }
     }
   }
@@ -108,8 +113,6 @@ function SixthStep(props) {
           className="bg-white w-[28rem] p-2 mt-60 sign-up-divs h-12 rounded-3xl mx-auto border border-gray-300 text-black font-bold block hover:bg-gray-300"
           onClick={() => {
             uploadUserPhoto()
-            navigate("/")
-            toast.success("Kayıt işlemi başarıyla gerçekleştirildi")
           }}
         >
           {userName.length < 4 ? "Şimdilik atla" : "Devam et"}

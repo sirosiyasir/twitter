@@ -50,6 +50,8 @@ function Profile() {
         setTextValue,
         setTweets,
         tweets,
+        profilePhoto,
+        name,
       }}
     >
       <div>
