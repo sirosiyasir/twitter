@@ -8,11 +8,11 @@ import { motion, AnimatePresence } from "framer-motion"
 // firebase cloud store'dan bilgileri getiriyorum
 import { useEffect, useState } from "react"
 /* import { useParams } from "react-router-dom" */
-import { collection, getDocs, query } from "firebase/firestore"
+import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../../firebase.config"
 import { toast } from "react-toastify"
 
-function Anasayfa(props) {
+function Anasayfa({ profilePhoto, shareTweet }) {
   /* const { tweets } = useContext(AnasayfaContext)
   const [createTweet, setCreateTweet] = useState(null) */
   const [listings, setListings] = useState(null)
@@ -28,8 +28,8 @@ function Anasayfa(props) {
 
         const listings = []
 
-        // Query oluituruyorum
-        const q = query(listingsRef)
+        // Firestore'daki dataları kendi belirlediğim şartlar altında burada oluşturuyorum(orderBy kullanarak dataların timestamp'e göre sırayla gelmesini sağlıyorum)
+        const q = query(listingsRef, orderBy("timestamp", "desc"))
 
         // query'imi çağırıyorum
         const querySnap = await getDocs(q)
@@ -46,13 +46,13 @@ function Anasayfa(props) {
       }
     }
     fetchListings()
-  }, [loading])
+  }, [shareTweet])
 
   return (
     <div className="border-x-[1px] border-gray-100 ml-[50px] md:ml-[100px] xl:ml-[265px] block w-[650px] mx-4">
       <AnasayfaNavbar />
       <div className="mt-32">
-        <AnasayfaTextArea profilePhoto={props.profilePhoto} />
+        <AnasayfaTextArea profilePhoto={profilePhoto} />
         {loading ? null : (
           <AnimatePresence>
             {listings.map((listing, index) => (
@@ -62,11 +62,7 @@ function Anasayfa(props) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <CreateTweet
-                  listing={listing.data}
-                  id={listing.id}
-                  key={listing.id}
-                />
+                <CreateTweet listing={listing.data} />
               </motion.div>
             ))}
           </AnimatePresence>

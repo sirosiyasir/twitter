@@ -9,14 +9,18 @@ import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 import ProgressBarArea from "./templates/ProgressBarArea"
 
 function AnasayfaTextArea(props) {
-  const { setHomePageOpacity } = useContext(AnasayfaContext)
+  // Tweetl'leri firebase'e göndermek ve tweet değerini kaydetmek için setTweets ve tweets
+  // yazılan tweet'in uzunluğunu kaydetmek (progressbar için) için setTextValueLength ve textValueLength
+  // addMoreTweet çalıştırıldığında sayfanın tamamı erişilemez(ekranda çıkan daha fazla tweet ekle card'ı hariç) ve soluk renkte olsun diye setHomePageOpacity
+  const {
+    setHomePageOpacity,
+    setTweets,
+    tweets,
+    setTextValueLength,
+    textValueLength,
+  } = useContext(AnasayfaContext)
   // Tweet yazma bölgesine tıklandığında gerekli bazı yerlerin ortaya çıkması için openTextArea
   const [openTextArea, setOpenTextArea] = useState(false)
-  // Textarea'ya yazılan değerin uzunluğunu yakalamak için
-  const [textValueLength, setTextValueLength] = useState("")
-  // yazılan tweet'i tweet'le butonuna basıldığı zaman paylaşmak için "tweet" state'inde tutuyorum
-  const [tweet, setTweet] = useState("")
-  // 280 kelimelik sınırın aşıldığını belirtmek için overText
   const [overText, setOverText] = useState("")
   // Progress Bar'ın text area'daki durumunu değiştirebilmek için
   const [progressBar, setProgressBar] = useState(true)
@@ -41,7 +45,7 @@ function AnasayfaTextArea(props) {
   }
   //Text area'ya girilen değerler için progress bar'ı etkinleştirmek ve button'ı disabled'dan çekmek vb için
   const textAreaChange = (e) => {
-    setTweet(e.target.value)
+    setTweets(e.target.value.slice(0, 280))
     if (e.target.value !== "") {
       setTextAreaValueCheck(true)
     } else if (e.target.value === "") {
@@ -124,7 +128,7 @@ function AnasayfaTextArea(props) {
         <textarea
           onChange={textAreaChange}
           onClick={textAreaOnClick}
-          value={tweet}
+          value={tweets}
           className="block w-full h-auto resize-none outline-none mt-5 placeholder:text-xl break-words"
           placeholder="Neler oluyor?"
         ></textarea>
@@ -180,8 +184,6 @@ function AnasayfaTextArea(props) {
           textAreaValueCheck={textAreaValueCheck}
           overText={overText}
           addMoreTweetClick={addMoreTweetClick}
-          tweet={tweet}
-          setTweet={setTweet}
         />
       </div>
     </div>
