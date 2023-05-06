@@ -1,24 +1,17 @@
 import AnasayfaNavbar from "../../navbar/AnasayfaNavbar"
 import AnasayfaTextArea from "./AnasayfaTextArea"
 import CreateTweet from "./templates/CreateTweet"
-/* import AnasayfaContext from "../../context/AnasayfaContext"
-import { useContext } from "react" */
 // tweet paylaşıldığında ekranda yavaşça ortaya çıkabilisin diye
 import { motion, AnimatePresence } from "framer-motion"
 // firebase cloud store'dan bilgileri getiriyorum
 import { useEffect, useState } from "react"
-/* import { useParams } from "react-router-dom" */
 import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../../firebase.config"
 import { toast } from "react-toastify"
 
 function Anasayfa({ profilePhoto, shareTweet }) {
-  /* const { tweets } = useContext(AnasayfaContext)
-  const [createTweet, setCreateTweet] = useState(null) */
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
-
-  /*  const params = useParams() */
 
   useEffect(() => {
     const fetchListings = async () => {

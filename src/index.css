@@ -8,9 +8,24 @@
   background-color: rgba(255, 255, 255, 0.5);
 }
 
+/* box-shadow */
+.my-box-shadow {
+  box-shadow: 1px 11px 45px -22px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 11px 45px -22px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 11px 45px -22px rgba(0, 0, 0, 0.75);
+}
+
 /* Daha fazla tweet ekleye tıklandığı zaman */
 .backdrop {
   background: rgba(0, 0, 0, 0.2);
+}
+
+/* logout ve addMoreTweet'i ekrana ortalamak için */
+.position {
+  position: fixed;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
 }
 
 @media screen and (min-width: 1670px) {

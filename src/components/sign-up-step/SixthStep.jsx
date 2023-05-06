@@ -1,10 +1,13 @@
+// firebase cloud'u import ediyorum
+import { addDoc, collection } from "firebase/firestore"
+import { db } from "../../firebase.config"
 // Redux için gerekli function'ları import ediyorum
 import { useSelector } from "react-redux"
 // useNavigate kullanarak, bir event sayesinde bir sayfadan başka bir sayfaya geçişi sağlayabiliyorum
 import { useNavigate } from "react-router-dom"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { ref, uploadBytes, getStorage } from "firebase/storage"
-import { getAuth } from "firebase/auth"
+import { getAuth, onAuthStateChanged } from "firebase/auth"
 // error vb kutucuklar oluşturmak için toastify'ı kullanıyorum
 import { toast } from "react-toastify"
 
@@ -16,8 +19,12 @@ function SixthStep(props) {
   const [userName, setUserName] = useState("")
   const [realName, setRealName] = useState("")
   const [inputFocus, setInputFocus] = useState(false)
-  const navigate = useNavigate()
+  const [formData, setFormData] = useState()
   const { userInformations } = useSelector((state) => state.userInformations)
+  const navigate = useNavigate()
+
+  const isMounted = useRef(true)
+  const auth = getAuth()
 
   const onChangeInput = (e) => {
     setUserName(e.target.value)
@@ -32,14 +39,42 @@ function SixthStep(props) {
     setRealName(userInformations.name)
   }, [userInformations.name])
 
-  const uploadUserPhoto = () => {
-    const auth = getAuth()
-    const user = auth.currentUser
+  useEffect(() => {
+    if (isMounted) {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setFormData({
+            userRef: user.uid,
+          })
+        } else {
+          navigate("/")
+        }
+      })
+    }
+    return () => {
+      isMounted.current = false
+    }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isMounted])
+  // kullanıcının seçtiği kullanıcı adını firebase'e daha sonra kullanmak üzre kaydediyoruz
+  const uploadUserName = async () => {
+    //Firebase Cloud Store'a kullanıcının seçtiği nick name'i ekliyorum
+    const formDataCopy = {
+      ...formData,
+      userName: userName,
+    }
 
+    await addDoc(collection(db, "nicknames"), formDataCopy)
+  }
+
+  // kullanıcının seçtiği görseli profil resmi olarak tanımlıyoruz(firebase)
+  const uploadUserPhoto = () => {
+    const user = auth.currentUser
+    console.log(user)
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      if (props.userPhoto !== undefined || "" || null) {
+      if (props.userPhoto) {
         const storage = getStorage()
         const imageRef = ref(storage, `images/${"profilePhoto" + user.uid}`)
         uploadBytes(imageRef, props.userPhoto)
@@ -113,6 +148,7 @@ function SixthStep(props) {
           className="bg-white w-[28rem] p-2 mt-60 sign-up-divs h-12 rounded-3xl mx-auto border border-gray-300 text-black font-bold block hover:bg-gray-300"
           onClick={() => {
             uploadUserPhoto()
+            uploadUserName()
           }}
         >
           {userName.length < 4 ? "Şimdilik atla" : "Devam et"}

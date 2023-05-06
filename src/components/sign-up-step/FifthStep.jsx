@@ -9,9 +9,11 @@ function FifthStep(props) {
   const dispatch = useDispatch()
 
   const loadFile = (e) => {
-    if (e.target.files && e.target.files[0]) {
+    if (e.target.files) {
       setUserProfilePicture(URL.createObjectURL(e.target.files[0]))
       props.setUserPhoto(e.target.files[0])
+    } else {
+      console.log("file doesn't choose")
     }
   }
   return (

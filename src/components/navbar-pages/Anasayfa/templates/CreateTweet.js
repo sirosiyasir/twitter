@@ -1,21 +1,9 @@
-function CreateTweet({
-  profilePhoto,
-  name,
-  tweet,
-  nickname,
-  like,
-  comment,
-  share,
-  interaction,
-  retweet,
-  listing,
-  id,
-}) {
+function CreateTweet({ listing }) {
   return (
-    <div className="">
+    <div className="relative">
       <div className="flex cursor-pointer hover:bg-gray-50 relative w-full">
         <img
-          className="rounded-full m-5 h-12 w-12"
+          className="rounded-full m-5 h-12 w-12 -z-0"
           src={
             listing.profilePhoto !== ""
               ? listing.profilePhoto

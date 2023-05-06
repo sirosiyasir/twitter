@@ -116,7 +116,7 @@ function AnasayfaAddMoreTweet(props) {
     setIsComponentVisible(true)
   }
   return (
-    <div className="fixed top-[20%] left-[30%]">
+    <div className="position">
       <div className="bg-white shadow-2xl w-[600px] h-auto rounded-3xl">
         <i
           onClick={closeTextBarClick}

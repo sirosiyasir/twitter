@@ -1,8 +1,13 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 // div dışında herhangi yere tıklanıldığı zaman açılır-kapanır bir div oluşturmak için
 import useComponentVisible from "../toggle-component/useComponentVisible"
+import useComponentVisible2 from "../toggle-component/useComponentVisible2"
+// Context
+import AnasayfaContext from "../context/AnasayfaContext"
 
 function Navbar(props) {
+  //context
+  const { setHomePageOpacityTwo } = useContext(AnasayfaContext)
   const [menuItems, setMenuItems] = useState({
     bell: false,
     envelope: false,
@@ -15,6 +20,8 @@ function Navbar(props) {
 
   const { reference, isComponentVisible, setIsComponentVisible } =
     useComponentVisible(false)
+  const { ref2, isComponentVisible2, setIsComponentVisible2 } =
+    useComponentVisible2(false)
 
   const navbarOnCLick = (e) => {
     props.setNavbarClick(e.target.id)
@@ -25,6 +32,13 @@ function Navbar(props) {
   }
   const menuMoreOnClick = () => {
     setIsComponentVisible(true)
+  }
+  const accountOnClick = () => {
+    setIsComponentVisible2(true)
+  }
+
+  const logOut = () => {
+    setHomePageOpacityTwo(false)
   }
 
   return (
@@ -208,7 +222,7 @@ function Navbar(props) {
             </button>
           )}
           {isComponentVisible && (
-            <div className="card bg-white w-[318px] h-auto shadow-lg absolute -top-60">
+            <div className="card bg-white w-[318px] h-auto shadow-lg absolute -top-60 z-[9999]">
               <div className="flex flex-col">
                 <div className="mr-auto mt-2">
                   <i className="fa-brands fa-rocketchat inline text-left ml-5 text-xl"></i>
@@ -225,7 +239,7 @@ function Navbar(props) {
                 <details className="mt-5 mb-6 ml-5">
                   <summary className="list-none font-semibold relative">
                     İçerik Üreticisi Stüdyosu
-                    <i className="fa-solid fa-angle-down absolute top-2 right-4"></i>
+                    <i className="fa-solid fa-angle-down absolute top-2 right-4 z-50"></i>
                   </summary>
                   <div className="mt-4">
                     <i className="fa-solid fa-chart-simple inline"></i>
@@ -235,7 +249,7 @@ function Navbar(props) {
                 <details className="mb-6 ml-5">
                   <summary className="list-none font-semibold relative">
                     Profesyonel Araçlar
-                    <i className="fa-solid fa-angle-down absolute top-2 right-4"></i>
+                    <i className="fa-solid fa-angle-down absolute top-2 right-4 z-50"></i>
                   </summary>
                   <div className="mt-4">
                     <i className="fa-solid fa-rocket inline"></i>
@@ -255,7 +269,7 @@ function Navbar(props) {
                 <details className="mb-5 ml-5">
                   <summary className="list-none font-semibold relative">
                     Ayarlar ve Destek
-                    <i className="fa-solid fa-angle-down absolute top-2 right-4"></i>
+                    <i className="fa-solid fa-angle-down absolute top-2 right-4 z-50"></i>
                   </summary>
                   <div className="mt-4">
                     <i className="fa-solid fa-gear inline"></i>
@@ -285,8 +299,24 @@ function Navbar(props) {
           <i className="fa-solid fa-feather-pointed"></i>
         </button>
       </div>
-      <div className="-ml-1 mb-4 hover:bg-slate-200 rounded-full px-2 pt-2 w-auto block h-[60px]">
-        <div className="flex flex-row">
+      <div
+        ref={ref2}
+        className="-ml-1 mb-4 hover:bg-slate-200 rounded-full px-2 pt-2 w-auto block h-[60px]"
+      >
+        {isComponentVisible2 && (
+          <div className="card bg-white absolute bottom-20 py-4 z-[9999] my-box-shadow">
+            <p className="hover:bg-gray-200 pl-4 pr-24 whitespace-nowrap py-2 font-bold cursor-pointer">
+              Mevcut bir hesap ekle
+            </p>
+            <p
+              onClick={logOut}
+              className="hover:bg-gray-200 pl-4 pr-24 whitespace-nowrap py-2 font-bold cursor-pointer"
+            >
+              Çıkış yap @sirosiyasir
+            </p>
+          </div>
+        )}
+        <div onClick={accountOnClick} className="flex flex-row">
           <div>
             <img
               src={
