@@ -7,7 +7,7 @@ import AnasayfaContext from "../context/AnasayfaContext"
 
 function Navbar(props) {
   //context
-  const { setHomePageOpacityTwo } = useContext(AnasayfaContext)
+  const { setHomePageOpacityTwo, nickName } = useContext(AnasayfaContext)
   const [menuItems, setMenuItems] = useState({
     bell: false,
     envelope: false,
@@ -301,7 +301,7 @@ function Navbar(props) {
       </div>
       <div
         ref={ref2}
-        className="-ml-1 mb-4 hover:bg-slate-200 rounded-full px-2 pt-2 w-auto block h-[60px]"
+        className="-ml-1 mb-4 hover:bg-slate-200 rounded-full px-2 pt-2 w-auto block h-[60px] cursor-pointer"
       >
         {isComponentVisible2 && (
           <div className="card bg-white absolute bottom-20 py-4 z-[9999] my-box-shadow">
@@ -330,7 +330,7 @@ function Navbar(props) {
           </div>
           <div className="px-5 navbar-hesap-bilgileri">
             <p className="text-center font-bold w-auto">{props.name}</p>
-            <p className="text-left">@sirosiyasir</p>
+            <p className="text-left">@{nickName}</p>
           </div>
           <div className="mt-2 navbar-hesap-bilgileri">
             <i className="fa-solid fa-ellipsis text-lg cursor-pointer ml-5"></i>

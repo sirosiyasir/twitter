@@ -1,4 +1,4 @@
-function CreateTweet({ listing }) {
+function CreateTweet({ listing, nickname }) {
   return (
     <div className="relative">
       <div className="flex cursor-pointer hover:bg-gray-50 relative w-full">

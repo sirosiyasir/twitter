@@ -13,7 +13,12 @@ import AnasayfaContext from "../components/context/AnasayfaContext"
 //firebase
 import { getAuth, onAuthStateChanged } from "firebase/auth"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
-import { collection, addDoc, serverTimestamp } from "firebase/firestore"
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+  getDocs,
+} from "firebase/firestore"
 import { db } from "../firebase.config"
 
 function Profile() {
@@ -36,10 +41,13 @@ function Profile() {
   const [tweets, setTweets] = useState()
   // yazılan tweet'in uzunluğunu kaydetmek (progressbar için) için setTextValueLength ve textValueLength
   const [textValueLength, setTextValueLength] = useState()
+
+  // kullanıcının seçtiği nickname
+  const [nickName, setNickName] = useState(null)
+  // kullanıcının default bilgilerini formData'ya kaydediyorum
   const [formData, setFormData] = useState({
     share: 0,
     retweet: 0,
-    nickname: "sirosiyasir",
     like: 15,
     interaction: 0,
     comment: 10,
@@ -69,6 +77,21 @@ function Profile() {
             userRef: user.uid,
             name: user.reloadUserInfo.displayName,
           })
+
+          if (user.uid) {
+            const getNickNames = async () => {
+              const querySnapshot = await getDocs(collection(db, "nicknames"))
+              querySnapshot.forEach((doc) => {
+                // Eğer aşağıdaki if statement'ını kullanmasaydım, collection'daki hangi nickname'in auth edilen hesapla eşleştiğini anlayamazdım
+                if (
+                  (doc.id, " => ", (doc.data().userRef === user.uid) === true)
+                ) {
+                  setNickName(doc.data().userName)
+                }
+              })
+            }
+            getNickNames()
+          }
         } else {
           navigate("/")
         }
@@ -87,6 +110,7 @@ function Profile() {
     //Firebase Cloud Store'a gerekli bilgileri ekliyorum
     const formDataCopy = {
       ...formData,
+      nickname: nickName,
       profilePhoto: profilePhoto,
       userTweet: tweets.slice(0, 280),
       timestamp: serverTimestamp(),
@@ -127,6 +151,7 @@ function Profile() {
         profilePhoto,
         name,
         shareTweet,
+        nickName,
       }}
     >
       <div>
@@ -146,6 +171,7 @@ function Profile() {
               <Anasayfa
                 profilePhoto={profilePhoto}
                 name={name}
+                nickName={nickName}
                 shareTweet={shareTweet}
               />
             )}

@@ -66,6 +66,7 @@ function FirstStep(props) {
             type="text"
             onChange={onChange}
             id="name"
+            maxLength="50"
             className="text-black bg-white border border-gray-300 w-[29rem] sign-up-divs first-step-inputs h-14 pl-1 rounded focus:outline-none focus:border-blue-400 block focus:placeholder-blue-400"
             placeholder="İsim"
           />

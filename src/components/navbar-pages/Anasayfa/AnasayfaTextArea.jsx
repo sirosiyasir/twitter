@@ -8,7 +8,7 @@ import useComponentVisible2 from "../../toggle-component/useComponentVisible2"
 // Tweet Area'nın alt kısmı
 import ProgressBarArea from "./templates/ProgressBarArea"
 
-function AnasayfaTextArea(props) {
+function AnasayfaTextArea({ profilePhoto }) {
   // Tweetl'leri firebase'e göndermek ve tweet değerini kaydetmek için setTweets ve tweets
   // yazılan tweet'in uzunluğunu kaydetmek (progressbar için) için setTextValueLength ve textValueLength
   // addMoreTweet çalıştırıldığında sayfanın tamamı erişilemez(ekranda çıkan daha fazla tweet ekle card'ı hariç) ve soluk renkte olsun diye setHomePageOpacity
@@ -74,8 +74,8 @@ function AnasayfaTextArea(props) {
         <img
           className="rounded-full m-3 w-12 h-12"
           src={
-            props.profilePhoto !== ""
-              ? props.profilePhoto
+            profilePhoto !== ""
+              ? profilePhoto
               : "https://pbs.twimg.com/media/FRynXImUcAAGFWk.png"
           }
           alt=""

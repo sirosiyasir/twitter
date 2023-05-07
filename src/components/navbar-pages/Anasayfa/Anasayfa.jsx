@@ -9,7 +9,7 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../../firebase.config"
 import { toast } from "react-toastify"
 
-function Anasayfa({ profilePhoto, shareTweet }) {
+function Anasayfa({ profilePhoto, shareTweet, nickname }) {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -45,7 +45,7 @@ function Anasayfa({ profilePhoto, shareTweet }) {
     <div className="border-x-[1px] border-gray-100 ml-[50px] md:ml-[100px] xl:ml-[265px] block w-[650px] mx-4">
       <AnasayfaNavbar />
       <div className="mt-32">
-        <AnasayfaTextArea profilePhoto={profilePhoto} />
+        <AnasayfaTextArea profilePhoto={profilePhoto} nickname={nickname} />
         {loading ? null : (
           <AnimatePresence>
             {listings.map((listing, index) => (
@@ -55,7 +55,7 @@ function Anasayfa({ profilePhoto, shareTweet }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <CreateTweet listing={listing.data} />
+                <CreateTweet listing={listing.data} nickname={nickname} />
               </motion.div>
             ))}
           </AnimatePresence>
