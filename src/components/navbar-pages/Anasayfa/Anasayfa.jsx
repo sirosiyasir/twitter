@@ -9,9 +9,12 @@ import { collection, getDocs, query, orderBy } from "firebase/firestore"
 import { db } from "../../../firebase.config"
 import { toast } from "react-toastify"
 
-function Anasayfa({ profilePhoto, shareTweet, nickname }) {
+function Anasayfa({ profilePhoto, shareTweet, nickname, scrollTop }) {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
+  // virtual scroll'da kaydırırken smooth yapının bozulmaması için bir başlama bir de bitiş belirliyoruz
+  const [startRowHeight, setStartRowHeight] = useState()
+  const [endRowHeight, setEndRowHeight] = useState()
 
   useEffect(() => {
     const fetchListings = async () => {
@@ -32,33 +35,42 @@ function Anasayfa({ profilePhoto, shareTweet, nickname }) {
             data: doc.data(),
           })
         })
-        setListings(listings)
+        const limit = 14
+        const rowHeight = 336
+        const startNode = Math.floor(scrollTop / rowHeight)
+        const listingsSlice = listings.slice(startNode, startNode + limit)
+        setEndRowHeight(listings.length * rowHeight - startRowHeight)
+        setListings(listingsSlice)
         setLoading(false)
       } catch (error) {
         toast.error("Tweetler yüklenirken bir problem oluştu")
+        console.log(error)
       }
     }
     fetchListings()
   }, [shareTweet])
-
+  console.log(scrollTop)
   return (
     <div className="border-x-[1px] border-gray-100 ml-[50px] md:ml-[100px] xl:ml-[265px] block w-[650px] mx-4">
       <AnasayfaNavbar />
-      <div className="mt-32">
+      <div className="mt-32 border-collapse">
         <AnasayfaTextArea profilePhoto={profilePhoto} nickname={nickname} />
         {loading ? null : (
-          <AnimatePresence>
-            {listings.map((listing, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-              >
-                <CreateTweet listing={listing.data} nickname={nickname} />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+          <div>
+            <AnimatePresence>
+              {listings.map((listing, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <CreateTweet listing={listing.data} nickname={nickname} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+            <div style={{ height: endRowHeight }}></div>
+          </div>
         )}
       </div>
     </div>

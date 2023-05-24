@@ -10,8 +10,15 @@ import ProgressBarArea from "./templates/ProgressBarArea"
 
 function AnasayfaAddMoreTweet(props) {
   //context
-  const { setHomePageOpacity, textValue, setTextValue } =
-    useContext(AnasayfaContext)
+  const {
+    setHomePageOpacity,
+    tweets,
+    setTweets,
+    closeAddNewTweet,
+    setCloseAddNewTweet,
+    tweetOpacity,
+    setTweetOpacity,
+  } = useContext(AnasayfaContext)
   // Tweet yazma bölgesine tıklandığında gerekli bazı yerlerin ortaya çıkması için openTextArea
   const [openTextArea, setOpenTextArea] = useState(false)
   // Textarea'ya yazılan değeri yakalayıp progress bar'da kullanmak için textValue
@@ -24,14 +31,10 @@ function AnasayfaAddMoreTweet(props) {
   const [progressBar, setProgressBar] = useState(true)
   // Progress Bar ve onunla birlikte açılacak olanların text area'daki value'ye göre belirlenmesi için
   const [textAreaValue, setTextAreaValue] = useState(false)
-  // Yeni tweet'teki x mark'a tıklanıldığı zaman
-  const [closeAddNewTweet, setCloseAddNewTweet] = useState(true)
   // İlk Tweet için 280 kelimelik sınırın aşıldığını belirtmek için overText
   const [prevOverText, setPrevOverText] = useState("")
   // İlk Tweet için Progress Bar'ın text area'daki durumunu değiştirebilmek için
   const [prevProgressBar, setPrevProgressBar] = useState(true)
-  // ilk tweet opacity ayarı,
-  const [tweetOpacity, setTweetOpacity] = useState(true)
   // ilk tweet'in value'si var mı
   const [textAreaValueCheck, setTextAreaValueCheck] = useState(true)
   // İlk tweet için progress bar deg ayarı
@@ -96,7 +99,7 @@ function AnasayfaAddMoreTweet(props) {
   // ilk tweet textarea onChange'i
   const textAreaOnChange = (e) => {
     if (e.target.value !== "") {
-      setTextValue(e.target.value)
+      setTweets(e.target.value)
       setTextAreaValueCheck(true)
     } else if (e.target.value === "") {
       setTextAreaValueCheck(false)
@@ -188,7 +191,7 @@ function AnasayfaAddMoreTweet(props) {
                 !tweetOpacity && "pb-5"
               } mt-5 placeholder:text-xl col-span-7`}
               placeholder="Neler oluyor?"
-              value={textValue}
+              value={tweets}
               onChange={textAreaOnChange}
             ></textarea>
             <div className={tweetOpacity ? "hidden" : "block"}>

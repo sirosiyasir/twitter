@@ -7,7 +7,13 @@ import AnasayfaContext from "../context/AnasayfaContext"
 
 function Navbar(props) {
   //context
-  const { setHomePageOpacityTwo, nickName } = useContext(AnasayfaContext)
+  const {
+    setHomePageOpacityTwo,
+    setHomePageOpacity,
+    nickName,
+    setCloseAddNewTweet,
+    setTweetOpacity,
+  } = useContext(AnasayfaContext)
   const [menuItems, setMenuItems] = useState({
     bell: false,
     envelope: false,
@@ -39,6 +45,12 @@ function Navbar(props) {
 
   const logOut = () => {
     setHomePageOpacityTwo(false)
+  }
+
+  const addMoreTweetNavbar = () => {
+    setHomePageOpacity(false)
+    setCloseAddNewTweet(false)
+    setTweetOpacity(false)
   }
 
   return (
@@ -292,7 +304,10 @@ function Navbar(props) {
             </div>
           )}
         </div>
-        <button className="bg-sky-500 w-auto h-14 rounded-full mr-auto mt-7 mb-0 px-[90px] py-2 text-white font-bold block hover:bg-sky-600 navbar-tweet-button">
+        <button
+          onClick={addMoreTweetNavbar}
+          className="bg-sky-500 w-auto h-14 rounded-full mr-auto mt-7 mb-0 px-[90px] py-2 text-white font-bold block hover:bg-sky-600 navbar-tweet-button"
+        >
           Tweetle
         </button>
         <button className="bg-sky-500 mt-5 py-2 rounded-full px-3 ml-1 text-2xl text-white block xl:hidden">

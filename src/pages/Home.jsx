@@ -41,7 +41,12 @@ function Profile() {
   const [tweets, setTweets] = useState()
   // yazılan tweet'in uzunluğunu kaydetmek (progressbar için) için setTextValueLength ve textValueLength
   const [textValueLength, setTextValueLength] = useState()
-
+  // Yeni tweet'teki x mark'a tıklanıldığı zaman
+  const [closeAddNewTweet, setCloseAddNewTweet] = useState(true)
+  // ilk tweet opacity ayarı,
+  const [tweetOpacity, setTweetOpacity] = useState(true)
+  // kullanıcının ekranı kaydırmasını kaydediyorum
+  const [scrollTop, setScrollTop] = useState(0)
   // kullanıcının seçtiği nickname
   const [nickName, setNickName] = useState(null)
   // kullanıcının default bilgilerini formData'ya kaydediyorum
@@ -52,7 +57,6 @@ function Profile() {
     interaction: 0,
     comment: 10,
   })
-
   const auth = getAuth()
   const isMounted = useRef(true)
 
@@ -152,9 +156,17 @@ function Profile() {
         name,
         shareTweet,
         nickName,
+        closeAddNewTweet,
+        setCloseAddNewTweet,
+        tweetOpacity,
+        setTweetOpacity,
+        scrollTop,
       }}
     >
-      <div>
+      <div
+        onScroll={(e) => setScrollTop(e.currentTarget.scrollTop)}
+        className="overflow-auto"
+      >
         <div
           className={`bg-white h-screen ${
             !homePageOpacity && "bg-white h-screen overflow-hidden"
@@ -173,6 +185,7 @@ function Profile() {
                 name={name}
                 nickName={nickName}
                 shareTweet={shareTweet}
+                scrollTop={scrollTop}
               />
             )}
             {navbarClick === "hashtag" && <Keşfet />}
