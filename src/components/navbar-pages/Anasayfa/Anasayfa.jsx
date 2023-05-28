@@ -5,72 +5,75 @@ import CreateTweet from "./templates/CreateTweet"
 import { motion, AnimatePresence } from "framer-motion"
 // firebase cloud store'dan bilgileri getiriyorum
 import { useEffect, useState } from "react"
-import { collection, getDocs, query, orderBy } from "firebase/firestore"
+import { collection, getDocs, query, orderBy, limit } from "firebase/firestore"
 import { db } from "../../../firebase.config"
 import { toast } from "react-toastify"
 
-function Anasayfa({ profilePhoto, shareTweet, nickname, scrollTop }) {
+function Anasayfa({ profilePhoto, shareTweet, scrollTop }) {
   const [listings, setListings] = useState(null)
   const [loading, setLoading] = useState(true)
-  // virtual scroll'da kaydırırken smooth yapının bozulmaması için bir başlama bir de bitiş belirliyoruz
-  const [startRowHeight, setStartRowHeight] = useState()
-  const [endRowHeight, setEndRowHeight] = useState()
+
+  // infinite scroll
+  const start = 0
+  const [end, setEnd] = useState(12)
+  const tweetHeight = 70
+  const pageSize = 12
+
+  const nextTweets = () => {
+    setEnd(end + pageSize)
+  }
+
+  if (scrollTop > end * tweetHeight) {
+    nextTweets()
+  }
 
   useEffect(() => {
     const fetchListings = async () => {
       try {
         // Cloud Store'deki collection'ı getiriyorum ve data'ları listings dizisine kaydediyorum
-        const listingsRef = collection(db, "listings")
+        const listingsRef = query(
+          collection(db, "listings"),
+          orderBy("timestamp", "desc")
+        )
 
         const listings = []
 
-        // Firestore'daki dataları kendi belirlediğim şartlar altında burada oluşturuyorum(orderBy kullanarak dataların timestamp'e göre sırayla gelmesini sağlıyorum)
-        const q = query(listingsRef, orderBy("timestamp", "desc"))
-
         // query'imi çağırıyorum
-        const querySnap = await getDocs(q)
+        const querySnap = await getDocs(listingsRef)
         querySnap.forEach((doc) => {
           return listings.push({
             id: doc.id,
             data: doc.data(),
           })
         })
-        const limit = 14
-        const rowHeight = 336
-        const startNode = Math.floor(scrollTop / rowHeight)
-        const listingsSlice = listings.slice(startNode, startNode + limit)
-        setEndRowHeight(listings.length * rowHeight - startRowHeight)
-        setListings(listingsSlice)
+
+        setListings(listings)
         setLoading(false)
       } catch (error) {
         toast.error("Tweetler yüklenirken bir problem oluştu")
-        console.log(error)
       }
     }
     fetchListings()
   }, [shareTweet])
-  console.log(scrollTop)
+
   return (
     <div className="border-x-[1px] border-gray-100 ml-[50px] md:ml-[100px] xl:ml-[265px] block w-[650px] mx-4">
       <AnasayfaNavbar />
-      <div className="mt-32 border-collapse">
-        <AnasayfaTextArea profilePhoto={profilePhoto} nickname={nickname} />
+      <div className="mt-32">
+        <AnasayfaTextArea profilePhoto={profilePhoto} />
         {loading ? null : (
-          <div>
-            <AnimatePresence>
-              {listings.map((listing, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <CreateTweet listing={listing.data} nickname={nickname} />
-                </motion.div>
-              ))}
-            </AnimatePresence>
-            <div style={{ height: endRowHeight }}></div>
-          </div>
+          <AnimatePresence>
+            {listings.slice(start, end).map((listing, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <CreateTweet listing={listing.data} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         )}
       </div>
     </div>

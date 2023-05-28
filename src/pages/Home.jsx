@@ -160,7 +160,6 @@ function Profile() {
         setCloseAddNewTweet,
         tweetOpacity,
         setTweetOpacity,
-        scrollTop,
       }}
     >
       <div
